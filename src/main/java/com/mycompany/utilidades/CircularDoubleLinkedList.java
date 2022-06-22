@@ -3,7 +3,7 @@ package com.mycompany.utilidades;
 
 import java.util.Iterator;
 
-public class CircularDooubleLinkedList<E> implements List<E>{
+public class CircularDoubleLinkedList<E> implements List<E>{
 
     private CircularDoubleNodeList<E> last;
    

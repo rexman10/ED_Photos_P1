@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
+   <children>
+      <Button layoutX="951.0" layoutY="182.0" mnemonicParsing="false" text="Button" />
+      <VBox layoutX="921.0" layoutY="45.0" spacing="20.0">
+         <children>
+            <HBox spacing="20.0">
+               <children>
+                  <Label prefWidth="60.0" text="Album:" />
+                  <ComboBox prefWidth="150.0" />
+                  <Button mnemonicParsing="false" text="Nuevo Albun" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Eliminar Albun" />
+                  <Button mnemonicParsing="false" text="Editar Albun" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Pane layoutX="49.0" layoutY="41.0" visible="false">
+         <children>
+            <ImageView fx:id="ivFullScreen" fitHeight="656.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnPrevPhoto" layoutX="10.0" layoutY="316.0" mnemonicParsing="false" text="Prev" />
+            <Button fx:id="btnNextPhoto" layoutX="773.0" layoutY="316.0" mnemonicParsing="false" text="Next" />
+            <Button fx:id="btnExitFullScreen" layoutX="787.0" layoutY="12.0" mnemonicParsing="false" text="X" />
+            <Label fx:id="lbPhotoName" layoutX="399.0" layoutY="620.0" text="Label" />
+         </children>
+      </Pane>
+      <HBox layoutX="951.0" layoutY="240.0" prefHeight="31.0" prefWidth="200.0">
+         <children>
+            <RadioButton fx:id="rbGridView" mnemonicParsing="false" selected="true" text="Grid view">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="vista" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbFullView" mnemonicParsing="false" text="Full view" toggleGroup="$vista" />
+         </children>
+      </HBox>
+      <FlowPane layoutX="49.0" layoutY="45.0" prefHeight="656.0" prefWidth="825.0">
+         <children>
+            <HBox prefHeight="117.0" prefWidth="233.0" />
+         </children>
+      </FlowPane>
+   </children>
+</Pane>
