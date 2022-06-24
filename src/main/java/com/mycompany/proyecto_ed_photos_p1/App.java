@@ -7,7 +7,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+
+import com.mycompany.modelo.Album;
+import com.mycompany.modelo.Imagen;
+import com.mycompany.utilidades.ArrayList;
+import com.mycompany.utilidades.DoubleLinkedList;
+import com.mycompany.utilidades.List;
+
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -15,6 +24,7 @@ import javafx.scene.control.Alert;
 public class App extends Application {
 
     private static Scene scene;
+    public static List<Album> albunes;
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -45,6 +55,10 @@ public class App extends Application {
         alert.setHeaderText("Notificacion");
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    public static void cargarBaseDatos(){
+        Imagen im1 = new Imagen();
     }
 
     public static void main(String[] args){

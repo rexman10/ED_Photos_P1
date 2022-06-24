@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.modelo;
-import com.mycompany.modelo.Albun;
+import com.mycompany.modelo.Album;
 import com.mycompany.modelo.Camara;
 import com.mycompany.proyecto_ed_photos_p1.App;
 
@@ -20,7 +20,7 @@ import javafx.scene.control.Alert.AlertType;
  *
  * @author alex_
  */
-public class Imagen implements Serializable, Comparator {
+public class Imagen implements Serializable, Comparator<Imagen> {
     private final String path = "imagenes/";
     private String description;
     private String lugar;
@@ -28,22 +28,21 @@ public class Imagen implements Serializable, Comparator {
     private Camara camara;
     private List<String> personas;
     private Calendar fecha_tomada;
-    private List<Albun> storedIn;
+    private List<Album> storedIn;
     private String reaccion;
     private List<String> comments;
     private List<String> keywords;
 
     @Override
-    public int compare(Object o1, Object o2) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int compare(Imagen i1, Imagen i2) {
+        return i1.getFecha_tomada().toString().compareTo(i2.getFecha_tomada().toString());
     }
 
-    public void moveToAlbum(Albun albun){
+    public void moveToAlbum(Album albun){
         albun.getContenido().addLast(this);
     }
 
-    public void removeFromAlbum(Albun albun){
+    public void removeFromAlbum(Album albun){
         App.mostrarAlerta(AlertType.CONFIRMATION, "Desea eliminar la imagen?");
         int indice = albun.getContenido().indexOf(this);
         albun.getContenido().remove(indice);
@@ -98,11 +97,11 @@ public class Imagen implements Serializable, Comparator {
         this.fecha_tomada = fecha_tomada;
     }
 
-    public List<Albun> getStoredIn() {
+    public List<Album> getStoredIn() {
         return storedIn;
     }
 
-    public void setStoredIn(List<Albun> storedIn) {
+    public void setStoredIn(List<Album> storedIn) {
         this.storedIn = storedIn;
     }
 

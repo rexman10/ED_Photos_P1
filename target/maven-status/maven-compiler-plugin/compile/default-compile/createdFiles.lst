@@ -4,9 +4,9 @@ com\mycompany\utilidades\DoubleLinkedList$1.class
 module-info.class
 com\mycompany\modelo\Albun.class
 com\mycompany\proyecto_ed_photos_p1\App.class
-com\mycompany\utilidades\PrincipalMenuController.class
 com\mycompany\utilidades\CircularDoubleLinkedList.class
 com\mycompany\utilidades\ArrayList$1.class
+com\mycompany\proyecto_ed_photos_p1\PrincipalMenuController.class
 com\mycompany\modelo\Imagen.class
 com\mycompany\utilidades\CircularDoubleNodeList.class
 com\mycompany\proyecto_ed_photos_p1\PrimaryController.class
