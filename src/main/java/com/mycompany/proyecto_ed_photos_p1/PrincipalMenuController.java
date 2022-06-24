@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -62,6 +63,24 @@ public class PrincipalMenuController implements Initializable {
     private Pane pFullview;
     @FXML
     private FlowPane fpGridView;
+    @FXML
+    private Label lbEtiquetas;
+    @FXML
+    private ToggleGroup reaction;
+    @FXML
+    private ComboBox<?> cbAlbum;
+    @FXML
+    private Label lbLugar;
+    @FXML
+    private RadioButton rbLike;
+    @FXML
+    private RadioButton ebLove;
+    @FXML
+    private RadioButton rbSad;
+    @FXML
+    private Label lbPersonas;
+    @FXML
+    private Label lbCamara;
 
     /**
      * Initializes the controller class.

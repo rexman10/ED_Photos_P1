@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
@@ -19,7 +20,13 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" layoutY="729.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="658.0" layoutY="71.0" stroke="TRANSPARENT" strokeType="INSIDE" width="41.0" />
-      <VBox layoutX="934.0" layoutY="123.0" prefHeight="57.0" prefWidth="319.0" spacing="10.0">
+      <VBox layoutX="930.0" layoutY="254.0" spacing="15.0">
+         <children>
+            <Label text="Etiquetas:" />
+            <Label fx:id="lbEtiquetas" prefHeight="19.0" prefWidth="321.0" text="Label" visible="false" />
+         </children>
+      </VBox>
+      <VBox layoutX="930.0" layoutY="123.0" prefHeight="57.0" prefWidth="319.0" spacing="10.0">
          <children>
             <Label prefHeight="26.0" prefWidth="42.0" text="Vista:" />
             <HBox prefHeight="31.0" prefWidth="200.0">
@@ -37,7 +44,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="927.0" layoutY="217.0" spacing="15.0">
+      <HBox layoutX="930.0" layoutY="204.0" spacing="15.0">
          <children>
             <Button fx:id="brnAgregarImg" mnemonicParsing="false" text="Agregar Imagen" />
             <Button fx:id="btnEditarImg" mnemonicParsing="false" text="Editar Imagen" />
@@ -49,7 +56,7 @@
             <HBox spacing="20.0">
                <children>
                   <Label prefWidth="60.0" text="Album:" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="cbAlbum" prefWidth="150.0" />
                   <Button fx:id="btnNuevoAlbun" mnemonicParsing="false" onAction="#crearAlbum" text="Nuevo Album" />
                </children>
             </HBox>
@@ -75,5 +82,56 @@
             <HBox prefHeight="117.0" prefWidth="233.0" />
          </children>
       </FlowPane>
+      <VBox layoutX="930.0" layoutY="324.0" prefHeight="49.0" prefWidth="153.0" spacing="15.0">
+         <children>
+            <Label text="Lugar:" />
+            <Label fx:id="lbLugar" prefHeight="17.0" prefWidth="157.0" text="Label" visible="false" />
+         </children>
+      </VBox>
+      <VBox layoutX="930.0" layoutY="384.0" spacing="15.0">
+         <children>
+            <Label text="Reaccion:" />
+            <HBox prefHeight="37.0" prefWidth="324.0" spacing="20.0">
+               <children>
+                  <RadioButton fx:id="rbLike" mnemonicParsing="false" text="Me gusta">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="reaction" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="ebLove" mnemonicParsing="false" text="Me encanta" toggleGroup="$reaction" />
+                  <RadioButton fx:id="rbSad" mnemonicParsing="false" text="Me entristece" toggleGroup="$reaction" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="930.0" layoutY="459.0" spacing="15.0">
+         <children>
+            <Label text="Personas:" />
+            <Label fx:id="lbPersonas" text="Label" visible="false" />
+         </children>
+      </VBox>
+      <VBox layoutX="1106.0" layoutY="325.0" prefHeight="49.0" prefWidth="153.0" spacing="15.0">
+         <children>
+            <Label text="Camara:" />
+            <Label fx:id="lbCamara" prefHeight="17.0" prefWidth="157.0" text="Label" visible="false" />
+         </children>
+      </VBox>
+      <VBox layoutX="930.0" layoutY="515.0" prefHeight="49.0" prefWidth="126.0" spacing="15.0">
+         <children>
+            <Label text="Fecha:" />
+            <Label text="Label" visible="false" />
+         </children>
+      </VBox>
+      <VBox layoutX="930.0" layoutY="566.0" spacing="15.0">
+         <children>
+            <Label text="Comentarios:" />
+            <ScrollPane>
+               <content>
+                  <VBox prefHeight="148.0" prefWidth="316.0" spacing="10.0" />
+               </content>
+            </ScrollPane>
+            <Button mnemonicParsing="false" text="Añadir Comentario" />
+         </children>
+      </VBox>
    </children>
 </Pane>
