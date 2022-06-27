@@ -6,6 +6,11 @@ public class Camara implements Serializable{
     private String modelo;
     private String marca;
 
+    public Camara(String modelo, String marca){
+        this.modelo = modelo;
+        this.marca = marca;
+    }
+
     public String getModelo() {
         return modelo;
     }

@@ -9,6 +9,7 @@ import com.mycompany.modelo.Camara;
 import com.mycompany.proyecto_ed_photos_p1.App;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Comparator;
 
@@ -21,17 +22,34 @@ import javafx.scene.control.Alert.AlertType;
  * @author alex_
  */
 public class Imagen implements Serializable, Comparator<Imagen> {
-    private final String path = "imagenes/";
+    private String path;
     private String description;
     private String lugar;
     private String nombre;
     private Camara camara;
     private List<String> personas;
-    private Calendar fecha_tomada;
+    private LocalDate fecha_tomada;
     private List<Album> storedIn;
     private String reaccion;
     private List<String> comments;
     private List<String> keywords;
+
+    public Imagen(String ruta, String desc, String location, Camara cam, LocalDate date ){
+        this.path = ruta;
+        this.description = desc;
+        this.lugar = location;
+        this.camara = cam;
+        this.fecha_tomada = date;
+        ArrayList<String> people = new ArrayList<>();
+        this. personas = people;
+        ArrayList<Album> albumes = new ArrayList<>();
+        this.storedIn = albumes;
+        ArrayList<String> comentarios = new ArrayList<>();
+        this.comments = comentarios;
+        ArrayList<String> tags = new ArrayList<>();
+        this.keywords = tags;
+    }
+
 
     @Override
     public int compare(Imagen i1, Imagen i2) {
@@ -47,6 +65,14 @@ public class Imagen implements Serializable, Comparator<Imagen> {
         int indice = albun.getContenido().indexOf(this);
         albun.getContenido().remove(indice);
         
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getDescription() {
@@ -89,11 +115,11 @@ public class Imagen implements Serializable, Comparator<Imagen> {
         this.personas = personas;
     }
 
-    public Calendar getFecha_tomada() {
+    public LocalDate getFecha_tomada() {
         return fecha_tomada;
     }
 
-    public void setFecha_tomada(Calendar fecha_tomada) {
+    public void setFecha_tomada(LocalDate fecha_tomada) {
         this.fecha_tomada = fecha_tomada;
     }
 
@@ -128,6 +154,8 @@ public class Imagen implements Serializable, Comparator<Imagen> {
     public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
     }
+
+    
     
     
 

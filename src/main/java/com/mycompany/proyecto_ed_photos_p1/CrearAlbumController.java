@@ -45,29 +45,35 @@ public class CrearAlbumController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        System.out.println(lbTitulo.getParent());
+
     }
     
     @FXML
     private void cerrarVentana(){
-        Stage stage = (Stage) lbTitulo.getScene().getWindow();
+        Stage stage = (Stage) lbTitulo.getParent().getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    public void guardarAlbum() throws IOException {
-        if (btnCrearAlbum.isPressed()) {
-            System.out.println("presionado guardar");
-            
-        }
-        try{
+    public void guardarAlbum() throws EmptyFieldException {
+        try {
         String nombre = txtNombre.getText();
         String desc = txtDescripcion.getText();
+        if (nombre.equals("") || desc.equals("")) {
+            throw new EmptyFieldException();
+        }
+        System.out.println("entre a crear album sin error xdc");
         Album nuevo = new Album(nombre, desc);
-
         App.albunes.addLast(nuevo);
+        App.mostrarAlerta(AlertType.INFORMATION, "Album "+nombre+" creado exitosamente");
+        cerrarVentana();
+        App.setRoot("principalMenu");
+        
         } catch (EmptyFieldException e) {
             App.mostrarAlerta(AlertType.ERROR, "Porfavor asegurese de llenar los campos");
+        } catch (IOException a) {
+            a.getStackTrace();
         }
     }
 

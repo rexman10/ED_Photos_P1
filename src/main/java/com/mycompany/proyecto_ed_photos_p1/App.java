@@ -8,8 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Formatter;
 
 import com.mycompany.modelo.Album;
+import com.mycompany.modelo.Camara;
 import com.mycompany.modelo.Imagen;
 import com.mycompany.utilidades.ArrayList;
 import com.mycompany.utilidades.DoubleLinkedList;
@@ -24,7 +29,7 @@ import javafx.scene.image.Image;
 public class App extends Application {
 
     private static Scene scene;
-    public static List<Album> albunes;
+    public static ArrayList<Album> albunes = new ArrayList<>();
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -58,10 +63,21 @@ public class App extends Application {
     }
 
     public static void cargarBaseDatos(){
-        Imagen im1 = new Imagen();
+        Camara cam1 = new Camara("Cannon","J25");
+        DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fecha1 = LocalDate.now();
+        String a = fecha1.format(f1);
+        Imagen im1 = new Imagen("src/main/resources/imagenes/img001.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im1.setNombre("img001");
+        System.out.println(fecha1);
+        System.out.println(a);
+        Album album1 = new Album("Album1", "visita a cascadas 2019");
+        album1.agregarImagen(im1);
+        albunes.addLast(album1);
     }
 
     public static void main(String[] args){
+        cargarBaseDatos();
         launch(args);
     }
 

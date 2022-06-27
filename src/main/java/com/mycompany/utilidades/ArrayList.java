@@ -144,6 +144,11 @@ public class ArrayList<E> implements List<E>{
         return elements[index];
         
     }
+
+    public E getLast(){
+        if(isEmpty()) throw new EmptyListException();
+        return this.get(this.effectiveSize-1);
+    }
     
     @Override
     public E set(int index, E e){
