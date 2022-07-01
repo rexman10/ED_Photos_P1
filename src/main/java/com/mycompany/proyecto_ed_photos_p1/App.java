@@ -67,13 +67,37 @@ public class App extends Application {
         DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fecha1 = LocalDate.now();
         String a = fecha1.format(f1);
-        Imagen im1 = new Imagen("src/main/resources/imagenes/img001.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im1.setNombre("img001");
-        System.out.println(fecha1);
-        System.out.println(a);
+        Imagen im1 = new Imagen("imagenes/img022.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im1.setNombre("img022");
         Album album1 = new Album("Album1", "visita a cascadas 2019");
         album1.agregarImagen(im1);
         albunes.addLast(album1);
+        Imagen im2 = new Imagen("imagenes/img001.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im2.setNombre("img001");
+        Imagen im3 = new Imagen("imagenes/img002.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im3.setNombre("img002");
+        Imagen im4 = new Imagen("imagenes/img019.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im4.setNombre("img019");
+        Imagen im5 = new Imagen("imagenes/img021.jpg","descripcion corta","Guayaquil",cam1,fecha1);
+        im5.setNombre("img021");
+
+        album1.agregarImagen(im2);
+        album1.agregarImagen(im3);
+        album1.agregarImagen(im4);
+        album1.agregarImagen(im5);
+        album1.agregarImagen(im2);
+        album1.agregarImagen(im3);
+        album1.agregarImagen(im4);
+        album1.agregarImagen(im5);
+        album1.agregarImagen(im2);
+        album1.agregarImagen(im3);
+        album1.agregarImagen(im4);
+        album1.agregarImagen(im5);
+        album1.agregarImagen(im2);
+        album1.agregarImagen(im3);
+        album1.agregarImagen(im4);
+        album1.agregarImagen(im5);
+
     }
 
     public static void main(String[] args){

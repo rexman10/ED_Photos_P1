@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -119,11 +118,6 @@
             <Button mnemonicParsing="false" text="Añadir Comentario" />
          </children>
       </VBox>
-      <FlowPane fx:id="fpGridView" layoutX="45.0" layoutY="72.0" prefHeight="656.0" prefWidth="825.0">
-         <children>
-            <HBox fx:id="hbGridContent" prefHeight="659.0" prefWidth="826.0" />
-         </children>
-      </FlowPane>
       <Pane fx:id="pFullview" layoutX="45.0" layoutY="72.0" visible="false">
          <children>
             <ImageView fx:id="ivFullScreen" fitHeight="656.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" />
@@ -133,5 +127,6 @@
             <Label fx:id="lbPhotoName" layoutX="399.0" layoutY="620.0" text="Label" />
          </children>
       </Pane>
+      <ScrollPane fx:id="spGridView" fitToWidth="true" hbarPolicy="NEVER" layoutX="38.0" layoutY="72.0" prefHeight="656.0" prefWidth="839.0" />
    </children>
 </Pane>
