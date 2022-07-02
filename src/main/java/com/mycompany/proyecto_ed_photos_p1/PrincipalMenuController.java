@@ -102,6 +102,8 @@ public class PrincipalMenuController implements Initializable {
     private ToggleGroup vista;
     @FXML
     private TilePane galeria;
+    
+    private Imagen currentImagen = null;
 
     /**
      * Initializes the controller class.
@@ -175,21 +177,23 @@ public class PrincipalMenuController implements Initializable {
 
     private Pane crearVistaImagen(Imagen imagen){
         InputStream input = null;
-        System.out.println("entrando al try");
         VBox recuadro = new VBox();
         Label titulo = new Label(imagen.getNombre());
         try {
-            System.out.println("entro");
             String fileName = imagen.getPath();
             System.out.println(fileName);
             input = App.class.getResource(fileName).openStream();
             //crear la imagen 
             Image nuevo = new Image(input, 100, 100, true, false);
             ImageView view = new  ImageView(nuevo);
-            System.out.println("crea la img");
+            System.out.println("imagen "+imagen.getPath()+" cargada");
             view.setFitHeight(150);
             view.setPreserveRatio(true);
             recuadro.getChildren().addAll(view,titulo);
+            recuadro.setOnMouseClicked(event -> {
+            currentImagen = imagen;
+            System.out.println(currentImagen.getNombre());
+        });
         } catch (Exception ex) {
             ex.getMessage();
         }  
