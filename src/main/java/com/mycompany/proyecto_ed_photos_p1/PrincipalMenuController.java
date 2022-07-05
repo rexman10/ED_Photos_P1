@@ -100,10 +100,29 @@ public class PrincipalMenuController implements Initializable {
     private ScrollPane spGridView;
     @FXML
     private ToggleGroup vista;
-    @FXML
     private TilePane galeria;
     
     private Imagen currentImagen = null;
+    @FXML
+    private ToggleGroup filtro;
+    @FXML
+    private VBox filtroSimple;
+    @FXML
+    private ComboBox<String> cbParametros1;
+    @FXML
+    private VBox filtroCompuesto;
+    @FXML
+    private ComboBox<String> cbParametros2;
+    @FXML
+    private Button btnFiltroSimple;
+    @FXML
+    private Button btnFiltroCompuesto;
+    @FXML
+    private RadioButton rbFiltroSimple;
+    @FXML
+    private RadioButton rbFiltroCompuesto;
+    @FXML
+    private Button btnFiltrar;
 
     /**
      * Initializes the controller class.
@@ -137,6 +156,24 @@ public class PrincipalMenuController implements Initializable {
         pFullview.setVisible(true);
         vista.selectToggle(rbFullView);
     }
+    
+        @FXML
+    private void setFiltroSimple(ActionEvent event) {
+        cbParametros2.setDisable(true);
+        btnFiltroCompuesto.setDisable(true);
+    }
+
+    @FXML
+    private void setFiltroCompuesto(ActionEvent event) {
+        cbParametros2.setDisable(false);
+        btnFiltroCompuesto.setDisable(false);
+    }
+
+    @FXML
+    private void filtrarImagenes(ActionEvent event) {
+        System.out.println("nada de momento");
+    }
+    
 
     @FXML
     private void crearAlbum(ActionEvent event){
@@ -165,7 +202,6 @@ public class PrincipalMenuController implements Initializable {
         }
     }
 
-    @FXML
     private TilePane createTilePane() {
         TilePane tilePane = new TilePane();
         tilePane.setAlignment(Pos.CENTER);
@@ -237,5 +273,5 @@ public class PrincipalMenuController implements Initializable {
             //hbGridContent.getChildren().addAll(recuadro);
         }
     }*/
-    
+
 }

@@ -128,5 +128,39 @@
          </children>
       </Pane>
       <ScrollPane fx:id="spGridView" fitToWidth="true" hbarPolicy="NEVER" layoutX="38.0" layoutY="72.0" prefHeight="656.0" prefWidth="839.0" />
+      <VBox layoutX="38.0" layoutY="6.0" prefHeight="68.0" prefWidth="171.0">
+         <children>
+            <Label text="Busqueda por filtro:" />
+            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <RadioButton fx:id="rbFiltroSimple" mnemonicParsing="false" onAction="#setFiltroSimple" selected="true" text="Simple">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="filtro" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbFiltroCompuesto" mnemonicParsing="false" onAction="#setFiltroCompuesto" text="Compuesta" toggleGroup="$filtro" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="filtroSimple" layoutX="234.0" layoutY="7.0" spacing="15.0">
+         <children>
+            <Label text="Parámetro:" />
+            <ComboBox fx:id="cbParametros1" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <VBox fx:id="filtroCompuesto" layoutX="401.0" layoutY="7.0" spacing="15.0">
+         <children>
+            <Label text="Parámetro:" />
+            <ComboBox fx:id="cbParametros2" disable="true" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" layoutX="568.0" layoutY="8.0" spacing="7.0">
+         <children>
+            <Button fx:id="btnFiltroSimple" mnemonicParsing="false" text="Agregar filtro simple" />
+            <Button fx:id="btnFiltroCompuesto" disable="true" mnemonicParsing="false" text="Agregar filtro compuesto" />
+         </children>
+      </VBox>
+      <Button fx:id="btnFiltrar" layoutX="776.0" layoutY="28.0" mnemonicParsing="false" onAction="#filtrarImagenes" text="Filtrar Imagenes" />
    </children>
 </Pane>
