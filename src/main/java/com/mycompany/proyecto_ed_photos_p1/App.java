@@ -17,8 +17,11 @@ import com.mycompany.modelo.Album;
 import com.mycompany.modelo.Camara;
 import com.mycompany.modelo.Imagen;
 import com.mycompany.utilidades.ArrayList;
+import com.mycompany.utilidades.CircularDoubleLinkedList;
 import com.mycompany.utilidades.DoubleLinkedList;
 import com.mycompany.utilidades.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
@@ -99,6 +102,155 @@ public class App extends Application {
         album1.agregarImagen(im5);
 
     }
+    
+        
+    //Busqueda Simple
+    public void showPerPerson(String persona, Album a) {
+        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getPersonas().contains(persona)) {
+                boolean gotKey = imagePerP.containsKey(persona);
+                if (gotKey) {
+                    imagePerP.get(persona).addLast(i);
+                } else {
+                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    newList.addLast(i);
+                    imagePerP.put(persona, newList);
+                }
+            }
+        }
+    }
+    
+    public void showPerPlace(String place, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerPl = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getLugar().equals(place)) {
+                boolean gotKey = imagePerPl.containsKey(place);
+                if (gotKey) {
+                    imagePerPl.get(place).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerPl.put(place, newList);
+                }
+            }
+        }
+    }
+    
+    
+    public void showPersonIn(String persona, String place, Album a) {
+        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getPersonas().contains(persona) && i.getLugar().equals(place)) {
+                boolean gotKey = imagePerP.containsKey(persona);
+                if (gotKey) {
+                    imagePerP.get(persona).addLast(i);
+                } else {
+                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    newList.addLast(i);
+                    imagePerP.put(persona, newList);
+                }
+            }
+        }
+    }
+
+    //Busqueda Compleja
+    public static void showPeople(List<String> p, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new ArrayList<>();
+
+        for (Imagen i : l) {
+            int numPer = 0;
+            for (String persona : i.getPersonas()) {
+                if (p.contains(persona)) {
+                    numPer++;
+                }
+                if (numPer == p.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        //return fotos;
+    }
+
+    public static void showPeopleIn(List<String> p, String place, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new ArrayList<>();
+
+        for (Imagen i : l) {
+            int numPer = 0;
+            for (String persona : i.getPersonas()) {
+                if (p.contains(persona) && i.getLugar().equals(place)) {
+                    numPer++;
+                }
+                if (numPer == p.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        //return fotos;
+    }
+    
+    //Búsqueda por Hashtag(s)
+    public void showPerHashtag (String hashtag, Album a) {
+        Map<String, ArrayList<Imagen>> imageHashtag = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getKeywords().contains(hashtag)) {
+                boolean gotKey = imageHashtag.containsKey(hashtag);
+                if (gotKey) {
+                    imageHashtag.get(hashtag).addLast(i);
+                } else {
+                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    newList.addLast(i);
+                    imageHashtag.put(hashtag, newList);
+                }
+            }
+        }
+    }
+    
+    //Búsqueda por Descripción
+    public void showPerDescription(String searchD, Album a) {
+        Map<String, ArrayList<Imagen>> imagePerD = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getDescription().contains(searchD)) {
+                boolean gotKey = imagePerD.containsKey(searchD);
+                if (gotKey) {
+                    imagePerD.get(searchD).addLast(i);
+                } else {
+                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    newList.addLast(i);
+                    imagePerD.put(searchD, newList);
+                }
+            }
+        }
+    }
+    
+    //Búsqueda por Reacciones
+    public void showPerReaction(String searchD, Album a) {
+        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getDescription().contains(searchD)) {
+                boolean gotKey = imagePerP.containsKey(searchD);
+                if (gotKey) {
+                    imagePerP.get(searchD).addLast(i);
+                } else {
+                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    newList.addLast(i);
+                    imagePerP.put(searchD, newList);
+                }
+            }
+        }
+    }
+    
+    //Búsqueda por Camara o Modelo de Cámara
+    
+    
 
     public static void main(String[] args){
         cargarBaseDatos();
