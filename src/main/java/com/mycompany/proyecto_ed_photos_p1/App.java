@@ -175,24 +175,6 @@ public class App extends Application {
         }
         //return fotos;
     }
-    
-        public static void showPlaces(List<String> p, Album a) {
-        List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
-
-        for (Imagen i : l) {
-            int numPer = 0;
-            for (String persona : i.getPersonas()) {
-                if (p.contains(persona)) {
-                    numPer++;
-                }
-                if (numPer == p.size()) {
-                    fotos.addLast(i);
-                }
-            }
-        }
-        //return fotos;
-    }
 
     public static void showPeopleIn(List<String> p, Album a) {
         List<Imagen> l = a.getContenido();
