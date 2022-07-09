@@ -106,7 +106,7 @@ public class App extends Application {
         
     //Busqueda Simple
     public void showPerPerson(String persona, Album a) {
-        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
             if (i.getPersonas().contains(persona)) {
@@ -114,7 +114,7 @@ public class App extends Application {
                 if (gotKey) {
                     imagePerP.get(persona).addLast(i);
                 } else {
-                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
                     imagePerP.put(persona, newList);
                 }
@@ -141,7 +141,7 @@ public class App extends Application {
     
     
     public void showPersonIn(String persona, String place, Album a) {
-        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
             if (i.getPersonas().contains(persona) && i.getLugar().equals(place)) {
@@ -149,7 +149,7 @@ public class App extends Application {
                 if (gotKey) {
                     imagePerP.get(persona).addLast(i);
                 } else {
-                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
                     imagePerP.put(persona, newList);
                 }
@@ -160,7 +160,25 @@ public class App extends Application {
     //Busqueda Compleja
     public static void showPeople(List<String> p, Album a) {
         List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new ArrayList<>();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+
+        for (Imagen i : l) {
+            int numPer = 0;
+            for (String persona : i.getPersonas()) {
+                if (p.contains(persona)) {
+                    numPer++;
+                }
+                if (numPer == p.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        //return fotos;
+    }
+    
+        public static void showPlaces(List<String> p, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         for (Imagen i : l) {
             int numPer = 0;
@@ -176,14 +194,14 @@ public class App extends Application {
         //return fotos;
     }
 
-    public static void showPeopleIn(List<String> p, String place, Album a) {
+    public static void showPeopleIn(List<String> p, Album a) {
         List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new ArrayList<>();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         for (Imagen i : l) {
             int numPer = 0;
             for (String persona : i.getPersonas()) {
-                if (p.contains(persona) && i.getLugar().equals(place)) {
+                if (p.contains(persona)) {
                     numPer++;
                 }
                 if (numPer == p.size()) {
@@ -196,7 +214,7 @@ public class App extends Application {
     
     //Búsqueda por Hashtag(s)
     public void showPerHashtag (String hashtag, Album a) {
-        Map<String, ArrayList<Imagen>> imageHashtag = new TreeMap<>();
+        Map<String, CircularDoubleLinkedList<Imagen>> imageHashtag = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
             if (i.getKeywords().contains(hashtag)) {
@@ -204,7 +222,7 @@ public class App extends Application {
                 if (gotKey) {
                     imageHashtag.get(hashtag).addLast(i);
                 } else {
-                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
                     imageHashtag.put(hashtag, newList);
                 }
@@ -212,9 +230,27 @@ public class App extends Application {
         }
     }
     
+    public void showPerHashtags(List<String> lHashtag, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+
+        for (Imagen i : l) {
+            int numHash = 0;
+            for (String keyword : i.getKeywords()) {
+                if (lHashtag.contains(keyword)) {
+                    numHash++;
+                }
+                if (numHash == lHashtag.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        //return fotos;
+    }
+   
     //Búsqueda por Descripción
     public void showPerDescription(String searchD, Album a) {
-        Map<String, ArrayList<Imagen>> imagePerD = new TreeMap<>();
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerD = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
             if (i.getDescription().contains(searchD)) {
@@ -222,7 +258,7 @@ public class App extends Application {
                 if (gotKey) {
                     imagePerD.get(searchD).addLast(i);
                 } else {
-                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
                     imagePerD.put(searchD, newList);
                 }
@@ -232,7 +268,7 @@ public class App extends Application {
     
     //Búsqueda por Reacciones
     public void showPerReaction(String searchD, Album a) {
-        Map<String, ArrayList<Imagen>> imagePerP = new TreeMap<>();
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
             if (i.getDescription().contains(searchD)) {
@@ -240,7 +276,7 @@ public class App extends Application {
                 if (gotKey) {
                     imagePerP.get(searchD).addLast(i);
                 } else {
-                    ArrayList<Imagen> newList = new ArrayList<Imagen>();
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
                     imagePerP.put(searchD, newList);
                 }
