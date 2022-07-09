@@ -105,22 +105,6 @@ public class App extends Application {
     
         
     //Busqueda Simple
-    public void showPerPerson(String persona, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            if (i.getPersonas().contains(persona)) {
-                boolean gotKey = imagePerP.containsKey(persona);
-                if (gotKey) {
-                    imagePerP.get(persona).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerP.put(persona, newList);
-                }
-            }
-        }
-    }
     
     public void showPerPlace(String place, Album a) {
         Map<String, CircularDoubleLinkedList<Imagen>> imagePerPl = new TreeMap<>();
@@ -138,26 +122,8 @@ public class App extends Application {
             }
         }
     }
-    
-    
-    public void showPersonIn(String persona, String place, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
 
-        for (Imagen i : a.getContenido()) {
-            if (i.getPersonas().contains(persona) && i.getLugar().equals(place)) {
-                boolean gotKey = imagePerP.containsKey(persona);
-                if (gotKey) {
-                    imagePerP.get(persona).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerP.put(persona, newList);
-                }
-            }
-        }
-    }
-
-    //Busqueda Compleja
+    
     public static void showPeople(List<String> p, Album a) {
         List<Imagen> l = a.getContenido();
         List<Imagen> fotos = new CircularDoubleLinkedList<>();
@@ -176,14 +142,15 @@ public class App extends Application {
         //return fotos;
     }
 
-    public static void showPeopleIn(List<String> p, Album a) {
+    //Busqueda Compleja
+    public static void showPeopleIn(List<String> p, String place, Album a) {
         List<Imagen> l = a.getContenido();
         List<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         for (Imagen i : l) {
             int numPer = 0;
             for (String persona : i.getPersonas()) {
-                if (p.contains(persona)) {
+                if (p.contains(persona) && i.getLugar().equals(place)) {
                     numPer++;
                 }
                 if (numPer == p.size()) {
@@ -195,22 +162,6 @@ public class App extends Application {
     }
     
     //Búsqueda por Hashtag(s)
-    public void showPerHashtag (String hashtag, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imageHashtag = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            if (i.getKeywords().contains(hashtag)) {
-                boolean gotKey = imageHashtag.containsKey(hashtag);
-                if (gotKey) {
-                    imageHashtag.get(hashtag).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imageHashtag.put(hashtag, newList);
-                }
-            }
-        }
-    }
     
     public void showPerHashtags(List<String> lHashtag, Album a) {
         List<Imagen> l = a.getContenido();
@@ -231,21 +182,23 @@ public class App extends Application {
     }
    
     //Búsqueda por Descripción
-    public void showPerDescription(String searchD, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerD = new TreeMap<>();
+    public void showPerDescription(List<String>searchD, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
 
-        for (Imagen i : a.getContenido()) {
-            if (i.getDescription().contains(searchD)) {
-                boolean gotKey = imagePerD.containsKey(searchD);
-                if (gotKey) {
-                    imagePerD.get(searchD).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerD.put(searchD, newList);
+        int numDesc = 0;
+        for (Imagen i : l) {
+            int numHash = 0;
+            for (String word: searchD) {
+                if (i.getDescription().contains(word)) {
+                    numHash++;
+                }
+                if (numHash == searchD.size()) {
+                    fotos.addLast(i);
                 }
             }
         }
+        //return fotos;
     }
     
     //Búsqueda por Reacciones
@@ -266,10 +219,49 @@ public class App extends Application {
         }
     }
     
-    //Búsqueda por Camara o Modelo de Cámara
-    
-    
+    //Búsqueda por Marca o Modelo de Cámara
+    public void showPerCamara(String searchC, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerCam = new TreeMap<>();
 
+        for (Imagen i : a.getContenido()) {
+            String marca = i.getCamara().getMarca();
+            String modelo = i.getCamara().getModelo();
+            if (marca.equals(searchC) || modelo.equals(searchC)) {
+                boolean gotKey = imagePerCam.containsKey(searchC);
+                if (gotKey) {
+                    imagePerCam.get(searchC).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerCam.put(searchC, newList);
+                }
+            }
+        }
+    }    
+    
+    //Implementar búsquedas que incluyan fechas: Fotos de enero de 2018 ; 
+    //fotos de Andres y Emilio entre Marzo y Julio del 2009; fotos tomadas en Quito en Marzo del 2010.
+    
+    //Busqueda por fecha year-month-day
+    public void showPerDate(String date, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerDate = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            String fechaFoto = i.getFecha_tomada().toString();
+            if (fechaFoto.equals(date)) {
+                boolean gotKey = imagePerDate.containsKey(date);
+                if (gotKey) {
+                    imagePerDate.get(date).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerDate.put(date, newList);
+                }
+            }
+        }
+    }    
+    
+    
     public static void main(String[] args){
         cargarBaseDatos();
         launch(args);
