@@ -43,6 +43,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -135,6 +136,8 @@ public class PrincipalMenuController implements Initializable {
     private Label lbFecha;
     
     private CircularDoubleLinkedList<Imagen> imagenesAlbum= new CircularDoubleLinkedList();
+    @FXML
+    private ListView<String> listaComentarios;
 
     /**
      * Initializes the controller class.
@@ -300,6 +303,8 @@ public class PrincipalMenuController implements Initializable {
         rbLove.setSelected(false);
         rbSad.setSelected(false);
         
+        listaComentarios.getItems().clear();
+        
         currentImagen = imagen;
         System.out.println(currentImagen.getNombre());
         lbLugar.setText(imagen.getLugar());
@@ -315,6 +320,12 @@ public class PrincipalMenuController implements Initializable {
             }
             if(imagen.getReaccion().equals("Me entristece")){
                 rbSad.setSelected(true);
+            }
+        }
+        
+        if(!imagen.getPersonas().isEmpty()){
+            for(String p: imagen.getPersonas()){
+                listaComentarios.getItems().add(p);
             }
         }
     }
@@ -488,6 +499,7 @@ public class PrincipalMenuController implements Initializable {
         lbLugar.setText("");
         lbCamara.setText("");
         lbFecha.setText("");
+        listaComentarios.getItems().clear();
     }
 
     @FXML
@@ -678,5 +690,42 @@ public class PrincipalMenuController implements Initializable {
             }
         }
     }    
+
+    @FXML
+    private void agregarComentario() {
+        if(currentImagen==null){
+            App.mostrarAlerta(Alert.AlertType.ERROR, "No se ha seleccionado ninguna foto");
+        }else{
+            try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("comentario.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            //aggPremio();
+            
+            String com=ComentarioController.comment;
+            ComentarioController.comment=null;
+            aggComment(com);
+            
+           
+            
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void aggComment(String com){
+        if(!com.isEmpty()){
+            listaComentarios.getItems().add(com);
+            App.mostrarAlerta(Alert.AlertType.INFORMATION,"Comentario añadido con exito");
+            List<String> personas=currentImagen.getPersonas();
+            personas.addLast(com);
+            currentImagen.setPersonas(personas);
+        }
+   
+    }
 
 }
