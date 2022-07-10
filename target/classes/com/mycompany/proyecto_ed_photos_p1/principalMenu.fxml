@@ -104,7 +104,7 @@
       <VBox layoutX="930.0" layoutY="515.0" prefHeight="49.0" prefWidth="126.0" spacing="15.0">
          <children>
             <Label text="Fecha:" />
-            <Label fx:id="lbFecha" text="Label" visible="false" />
+            <Label fx:id="lbFecha" />
          </children>
       </VBox>
       <VBox layoutX="930.0" layoutY="566.0" spacing="15.0">

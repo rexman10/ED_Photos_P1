@@ -19,6 +19,7 @@ import com.mycompany.utilidades.List;
 import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -153,7 +154,7 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     private void setVistaGrid(ActionEvent event) {
-        currentImagen=null;
+        resetCurrentImagen();
         imagenesAlbum.clear();
         
         spGridView.setVisible(true);
@@ -181,8 +182,9 @@ public class PrincipalMenuController implements Initializable {
             }
             
             if(currentImagen==null){
-                setearImageView(imagenesAlbum.get(0).getPath());
-                currentImagen=imagenesAlbum.get(0);
+                Imagen imagen=imagenesAlbum.get(0);
+                setearImageView(imagen.getPath());
+                setearDatosInterfaz(imagen);
             } 
             
             if(currentImagen!=null){
@@ -196,7 +198,7 @@ public class PrincipalMenuController implements Initializable {
                     while(it.hasNext()){
                         Imagen imActual=it.next();
                         if(imActual.getPath().equals(currentImagen.getPath())){
-                            currentImagen=imActual;
+                            setearDatosInterfaz(imActual);
                             setearImageView(imActual.getPath());
                             esFoto=true;
                         }
@@ -278,17 +280,22 @@ public class PrincipalMenuController implements Initializable {
             view.setPreserveRatio(true);
             recuadro.getChildren().addAll(view,titulo);
             recuadro.setOnMouseClicked(event -> {
-            currentImagen = imagen;
-            System.out.println(currentImagen.getNombre());
+                
+                setearDatosInterfaz(imagen);
             
-            lbLugar.setText(imagen.getLugar());
-            lbCamara.setText("Marca: "+imagen.getCamara().getMarca()+" - Modelo: "+imagen.getCamara().getModelo());
-            lbFecha.setText(imagen.getFecha_tomada().format(DateTimeFormatter.ISO_DATE));
         });
         } catch (Exception ex) {
             ex.getMessage();
         }  
         return recuadro;
+    }
+    
+    private void setearDatosInterfaz(Imagen imagen){
+        currentImagen = imagen;
+        System.out.println(currentImagen.getNombre());
+        lbLugar.setText(imagen.getLugar());
+        lbCamara.setText("Marca: "+imagen.getCamara().getMarca()+" - Modelo: "+imagen.getCamara().getModelo());
+        lbFecha.setText(imagen.getFecha_tomada().format(DateTimeFormatter.ISO_DATE));
     }
 
     /*@FXML
@@ -304,6 +311,7 @@ public class PrincipalMenuController implements Initializable {
     @FXML
     public void mostrarAlbum(){
         galeria.getChildren().clear();
+        resetCurrentImagen();
 
         if (!cbAlbum.getValue().getContenido().isEmpty()) {
             for (Imagen imagen : cbAlbum.getValue().getContenido()) {
@@ -396,21 +404,69 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     private void eliminarImagen(ActionEvent event) {
-        //A IMPLEMENTAR AUN
         if(currentImagen==null){
             App.mostrarAlerta(Alert.AlertType.INFORMATION, "No se ha seleccionado ninguna imagen");
         }else{
-            
+            int n=App.confirmacion("¿Desea eliminar la imagen seleccionada?");
+            if(n!=0){
+                List<Imagen> listaOriginal=cbAlbum.getValue().getContenido();
+                List<Imagen> lista=listaOriginal;
+
+                int ind=0;
+                for(Imagen im:listaOriginal){
+                    if(im.getNombre().equals(currentImagen.getNombre())){
+                        lista.remove(ind);
+                    }
+                    ind++;
+                }
+                
+                cbAlbum.getValue().setContenido(lista);
+                App.mostrarAlerta(Alert.AlertType.INFORMATION, "Imagen eliminada con éxito del álbum: "+cbAlbum.getValue().getNombre());
+                mostrarAlbum();
+            }
+          
         }
         
     }
 
     @FXML
     private void fotoAnterior(ActionEvent event) {
+        ListIterator<Imagen> it= imagenesAlbum.listIterator();
+        
+        boolean esFoto=false;
+        while(esFoto==false){
+            Imagen im=it.previous();
+            if(im.getPath().equals(currentImagen.getPath())){
+                esFoto=true;
+            }
+        }
+        
+        Imagen nuevaImagen=it.previous();
+        setearDatosInterfaz(nuevaImagen);
+        setearImageView(nuevaImagen.getPath());
     }
 
     @FXML
     private void fotoSiguiente(ActionEvent event) {
+        ListIterator<Imagen> it= imagenesAlbum.listIterator();
+        boolean esFoto=false;
+        while(esFoto==false){
+            Imagen im=it.next();
+            if(im.getPath().equals(currentImagen.getPath())){
+                esFoto=true;
+            }
+        }
+        
+        Imagen nuevaImagen=it.next();
+        setearDatosInterfaz(nuevaImagen);
+        setearImageView(nuevaImagen.getPath());
+    }
+    
+    private void resetCurrentImagen(){
+        currentImagen=null;
+        lbLugar.setText("");
+        lbCamara.setText("");
+        lbFecha.setText("");
     }
 
 }

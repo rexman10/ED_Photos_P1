@@ -21,9 +21,11 @@ import com.mycompany.utilidades.CircularDoubleLinkedList;
 import com.mycompany.utilidades.DoubleLinkedList;
 import com.mycompany.utilidades.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
 /**
@@ -33,6 +35,8 @@ public class App extends Application {
 
     private static Scene scene;
     public static ArrayList<Album> albunes = new ArrayList<>();
+
+
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -295,6 +299,21 @@ public class App extends Application {
             }
         }
     }    
+    
+    public static int confirmacion(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("CONFIRMACION");
+        alert.setHeaderText("ELIMINAR");
+        alert.setContentText(mensaje);
+        Optional<ButtonType> result=alert.showAndWait();
+        int n=0;
+        if(result.get()==ButtonType.OK){
+            n++;
+        }
+
+        return n;
+    }
     
     
     public static void main(String[] args){

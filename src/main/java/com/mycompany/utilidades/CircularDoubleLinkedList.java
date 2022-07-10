@@ -168,7 +168,9 @@ public class CircularDoubleLinkedList<E> implements List<E>{
             @Override
             public E next() {
                 if(node == last){
-                    node = null;
+                    
+                    node = last.getNext();
+                    
                     return last.getContent();
                 }
                 node = node.getNext();
@@ -183,13 +185,13 @@ public class CircularDoubleLinkedList<E> implements List<E>{
 
             @Override
             public E previous() {
-                if(node == last){
-                    node = null;
-                    return last.getContent();
+                if(node == last.getNext()){
+                    node = last;
+                    return last.getNext().getContent();
                 }
-                node = node.getNext();
+                node = node.getPrevious();
                 
-                return node.getPrevious().getContent();
+                return node.getNext().getContent();
             }
 
             @Override

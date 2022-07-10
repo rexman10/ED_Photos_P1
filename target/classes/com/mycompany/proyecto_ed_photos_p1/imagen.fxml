@@ -60,10 +60,11 @@
                      <children>
                         <TableView fx:id="tablaPersonas" prefHeight="124.0" prefWidth="289.0">
                           <columns>
-                            <TableColumn prefWidth="263.0" text="Nombre" />
+                            <TableColumn fx:id="colNombres" prefWidth="191.0" text="Nombre" />
+                              <TableColumn fx:id="colOpciones" prefWidth="96.0" text="Opciones" />
                           </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Agregar Persona" />
+                        <Button mnemonicParsing="false" onAction="#agregarPersona" text="Agregar Persona" />
                      </children>
                   </VBox>
                </children>

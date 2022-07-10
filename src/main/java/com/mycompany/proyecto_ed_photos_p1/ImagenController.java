@@ -66,6 +66,10 @@ public class ImagenController implements Initializable {
     @FXML
     private TableView<Imagen> tablaPersonas;
     @FXML
+    private TableColumn<Imagen, String> colNombres;
+    @FXML
+    private TableColumn<Imagen, Void> colOpciones;
+    @FXML
     private Label titulo;
     @FXML
     private Button botonGuardar;
@@ -286,6 +290,11 @@ public class ImagenController implements Initializable {
         
         
         
+    }
+    
+    @FXML
+    private void agregarPersona(ActionEvent event) {
+
     }
 
 
