@@ -152,6 +152,8 @@ public class PrincipalMenuController implements Initializable {
         }
         mostrarAlbum();
         
+        llenarComboP1();
+        llenarComboP2();
     }    
 
     @FXML
@@ -505,6 +507,20 @@ public class PrincipalMenuController implements Initializable {
         }
     }
     
+    public void llenarComboP1(){
+        cbParametros1.getItems().add("Personas");
+        cbParametros1.getItems().add("Lugar");
+        cbParametros1.getItems().add("Fecha");
+        cbParametros1.getItems().add("Cámara");
+        cbParametros1.getItems().add("Hashtags");
+        cbParametros1.getItems().add("Descripcion");
+        cbParametros1.getItems().add("Reaccion");
+    }
+    
+    public void llenarComboP2(){
+        cbParametros2.getItems().add("Personas");
+        cbParametros2.getItems().add("Lugar");
+    }
         //Busqueda Simple
     
     public void showPerPlace(String place, Album a) {
@@ -603,18 +619,18 @@ public class PrincipalMenuController implements Initializable {
     }
     
     //Búsqueda por Reacciones
-    public void showPerReaction(String searchD, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerP = new TreeMap<>();
+    public void showPerReaction(String searchR, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerR = new TreeMap<>();
 
         for (Imagen i : a.getContenido()) {
-            if (i.getDescription().contains(searchD)) {
-                boolean gotKey = imagePerP.containsKey(searchD);
+            if (i.getReaccion().equals(searchR)) {
+                boolean gotKey = imagePerR.containsKey(searchR);
                 if (gotKey) {
-                    imagePerP.get(searchD).addLast(i);
+                    imagePerR.get(searchR).addLast(i);
                 } else {
                     CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
-                    imagePerP.put(searchD, newList);
+                    imagePerR.put(searchR, newList);
                 }
             }
         }
