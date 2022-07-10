@@ -76,7 +76,7 @@ public class PrincipalMenuController implements Initializable {
     @FXML
     private ComboBox<Album> cbAlbum;
     @FXML
-    private RadioButton ebLove;
+    private RadioButton rbLove;
     @FXML
     private ImageView ivFullScreen;
     @FXML
@@ -291,11 +291,27 @@ public class PrincipalMenuController implements Initializable {
     }
     
     private void setearDatosInterfaz(Imagen imagen){
+        rbLike.setSelected(false);
+        rbLove.setSelected(false);
+        rbSad.setSelected(false);
+        
         currentImagen = imagen;
         System.out.println(currentImagen.getNombre());
         lbLugar.setText(imagen.getLugar());
         lbCamara.setText("Marca: "+imagen.getCamara().getMarca()+" - Modelo: "+imagen.getCamara().getModelo());
         lbFecha.setText(imagen.getFecha_tomada().format(DateTimeFormatter.ISO_DATE));
+        
+        if(imagen.getReaccion() != null){
+            if(imagen.getReaccion().equals("Me gusta")){
+                rbLike.setSelected(true);
+            }
+            if(imagen.getReaccion().equals("Me encanta")){
+                rbLove.setSelected(true);
+            }
+            if(imagen.getReaccion().equals("Me entristece")){
+                rbSad.setSelected(true);
+            }
+        }
     }
 
     /*@FXML
@@ -467,6 +483,24 @@ public class PrincipalMenuController implements Initializable {
         lbLugar.setText("");
         lbCamara.setText("");
         lbFecha.setText("");
+    }
+
+    @FXML
+    private void setReaction() {
+        if(currentImagen==null){
+            App.mostrarAlerta(Alert.AlertType.ERROR, "No se ha seleccionado ninguna foto");
+        }else{
+            
+            if(rbLike.isSelected()){
+                currentImagen.setReaccion("Me gusta");
+            }
+            if(rbLove.isSelected()){
+                currentImagen.setReaccion("Me encanta");
+            }
+            if(rbSad.isSelected()){
+                currentImagen.setReaccion("Me entristece");
+            }
+        }
     }
 
 }

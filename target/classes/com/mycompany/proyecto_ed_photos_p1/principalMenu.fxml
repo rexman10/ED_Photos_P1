@@ -78,13 +78,13 @@
             <Label text="Reaccion:" />
             <HBox prefHeight="37.0" prefWidth="324.0" spacing="20.0">
                <children>
-                  <RadioButton fx:id="rbLike" mnemonicParsing="false" text="Me gusta">
+                  <RadioButton fx:id="rbLike" mnemonicParsing="false" onAction="#setReaction" text="Me gusta">
                      <toggleGroup>
                         <ToggleGroup fx:id="reaction" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="ebLove" mnemonicParsing="false" text="Me encanta" toggleGroup="$reaction" />
-                  <RadioButton fx:id="rbSad" mnemonicParsing="false" text="Me entristece" toggleGroup="$reaction" />
+                  <RadioButton fx:id="rbLove" mnemonicParsing="false" onAction="#setReaction" text="Me encanta" toggleGroup="$reaction" />
+                  <RadioButton fx:id="rbSad" mnemonicParsing="false" onAction="#setReaction" text="Me entristece" toggleGroup="$reaction" />
                </children>
             </HBox>
          </children>
