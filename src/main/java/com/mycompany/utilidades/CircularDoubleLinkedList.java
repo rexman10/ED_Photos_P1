@@ -2,6 +2,7 @@
 package com.mycompany.utilidades;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class CircularDoubleLinkedList<E> implements List<E>{
 
@@ -149,6 +150,73 @@ public class CircularDoubleLinkedList<E> implements List<E>{
                 return node.getPrevious().getContent();
             }
         
+        };
+    }
+    
+    //A IMPLEMENTAR AUN DIEGO
+    public ListIterator<E> listIterator(){
+        if(isEmpty()) throw new EmptyListException();
+        return new ListIterator<E>(){
+            
+            CircularDoubleNodeList<E> node = last.getNext();
+            
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public E next() {
+                if(node == last){
+                    node = null;
+                    return last.getContent();
+                }
+                node = node.getNext();
+                
+                return node.getPrevious().getContent();
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return node != null;
+            }
+
+            @Override
+            public E previous() {
+                if(node == last){
+                    node = null;
+                    return last.getContent();
+                }
+                node = node.getNext();
+                
+                return node.getPrevious().getContent();
+            }
+
+            @Override
+            public int nextIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public int previousIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void set(E e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void add(E e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+            
         };
     }
 

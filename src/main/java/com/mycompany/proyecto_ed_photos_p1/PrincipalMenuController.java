@@ -12,10 +12,13 @@ import java.util.ResourceBundle;
 import com.mycompany.modelo.Album;
 import com.mycompany.modelo.Imagen;
 import com.mycompany.utilidades.ArrayList;
+import com.mycompany.utilidades.CircularDoubleLinkedList;
 import com.mycompany.utilidades.EmptyFieldException;
 import com.mycompany.utilidades.List;
 
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -33,6 +36,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -123,6 +127,10 @@ public class PrincipalMenuController implements Initializable {
     private RadioButton rbFiltroCompuesto;
     @FXML
     private Button btnFiltrar;
+    @FXML
+    private Label lbFecha;
+    
+    private CircularDoubleLinkedList<Imagen> imagenesAlbum= new CircularDoubleLinkedList();
 
     /**
      * Initializes the controller class.
@@ -145,6 +153,9 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     private void setVistaGrid(ActionEvent event) {
+        currentImagen=null;
+        imagenesAlbum.clear();
+        
         spGridView.setVisible(true);
         pFullview.setVisible(false);
         vista.selectToggle(rbGridView);
@@ -155,6 +166,46 @@ public class PrincipalMenuController implements Initializable {
         spGridView.setVisible(false);
         pFullview.setVisible(true);
         vista.selectToggle(rbFullView);
+        
+        if (!cbAlbum.getValue().getContenido().isEmpty()) {
+             /* OTRA ALTERNATIVA
+            int n=0;
+            for (Imagen imagen : cbAlbum.getValue().getContenido()) {
+                imagenesAlbum.add(imagen, n);
+                n++;
+            }
+            */
+            
+            for (Imagen imagen : cbAlbum.getValue().getContenido()) {
+                imagenesAlbum.addLast(imagen);
+            }
+            
+            if(currentImagen==null){
+                setearImageView(imagenesAlbum.get(0).getPath());
+                currentImagen=imagenesAlbum.get(0);
+            } 
+            
+            if(currentImagen!=null){
+                boolean esFoto=false;
+                
+                
+                
+                while(esFoto==false){
+                    Iterator<Imagen> it=imagenesAlbum.iterator();
+                    
+                    while(it.hasNext()){
+                        Imagen imActual=it.next();
+                        if(imActual.getPath().equals(currentImagen.getPath())){
+                            currentImagen=imActual;
+                            setearImageView(imActual.getPath());
+                            esFoto=true;
+                        }
+                    }
+                }
+                
+            }
+            
+        }
     }
     
         @FXML
@@ -229,6 +280,10 @@ public class PrincipalMenuController implements Initializable {
             recuadro.setOnMouseClicked(event -> {
             currentImagen = imagen;
             System.out.println(currentImagen.getNombre());
+            
+            lbLugar.setText(imagen.getLugar());
+            lbCamara.setText("Marca: "+imagen.getCamara().getMarca()+" - Modelo: "+imagen.getCamara().getModelo());
+            lbFecha.setText(imagen.getFecha_tomada().format(DateTimeFormatter.ISO_DATE));
         });
         } catch (Exception ex) {
             ex.getMessage();
@@ -273,5 +328,89 @@ public class PrincipalMenuController implements Initializable {
             //hbGridContent.getChildren().addAll(recuadro);
         }
     }*/
+    
+    private void setearImageView(String ruta){
+        InputStream input = null;
+        try {
+             String fileName =ruta;//armar la ruta de la foto
+
+             System.out.println("FOTO RUTA"+fileName);
+
+
+             //abrir el stream de la imagen de la persona
+             input = App.class.getResource(fileName).openStream();
+
+             //crear la imagen 
+             Image image = new Image(input, 1000, 1000, false, false);
+             ivFullScreen.setImage(image);
+
+            } catch (Exception ex) {
+                 System.out.println("No se encuentra archivo de imagen:  "+ex);
+                } finally {
+                if (input != null) {
+                    try {
+                   input.close();
+                } catch (IOException ex) {
+                System.out.println("No se pudo cerrar");
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void crearImagen(ActionEvent event) {
+        try {
+            
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("imagen.fxml"));//no tiene el controlador especificado
+            ImagenController ct = new ImagenController();
+
+            fxmlLoader.setController(ct);//se asigna el controlador
+            HBox root = (HBox) fxmlLoader.load();
+            App.changeRoot(root);
+
+            }catch (IOException ex) {
+                ex.printStackTrace();
+            }
+    }
+
+    @FXML
+    private void editarImagen(ActionEvent event) {
+        if(currentImagen==null){
+            App.mostrarAlerta(Alert.AlertType.INFORMATION, "No se ha seleccionado ninguna imagen");
+        }else{
+            
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("imagen.fxml"));//no tiene el controlador especificado
+                ImagenController ct = new ImagenController();
+
+                fxmlLoader.setController(ct);//se asigna el controlador
+                HBox root = (HBox) fxmlLoader.load();
+                ct.llenarCampos(currentImagen, cbAlbum.getValue());
+                App.changeRoot(root);
+
+            }catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void eliminarImagen(ActionEvent event) {
+        //A IMPLEMENTAR AUN
+        if(currentImagen==null){
+            App.mostrarAlerta(Alert.AlertType.INFORMATION, "No se ha seleccionado ninguna imagen");
+        }else{
+            
+        }
+        
+    }
+
+    @FXML
+    private void fotoAnterior(ActionEvent event) {
+    }
+
+    @FXML
+    private void fotoSiguiente(ActionEvent event) {
+    }
 
 }

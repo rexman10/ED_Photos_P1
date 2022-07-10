@@ -88,6 +88,7 @@ public class App extends Application {
         album1.agregarImagen(im3);
         album1.agregarImagen(im4);
         album1.agregarImagen(im5);
+        /*
         album1.agregarImagen(im2);
         album1.agregarImagen(im3);
         album1.agregarImagen(im4);
@@ -100,6 +101,40 @@ public class App extends Application {
         album1.agregarImagen(im3);
         album1.agregarImagen(im4);
         album1.agregarImagen(im5);
+        */
+        
+        Camara cam2 = new Camara("Cannon","H95");
+        Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","descripcion corta","Guayaquil",cam2,fecha1);
+        imd1.setNombre("d-imagen-1");
+        Imagen imd2 = new Imagen("imagenes/d-imagen-2.jpg","descripcion corta","Vista Sol",cam2,fecha1);
+        imd2.setNombre("d-imagen-2");
+        Imagen imd3 = new Imagen("imagenes/d-imagen-3.jpg","descripcion corta","Milagro",cam2,fecha1);
+        imd3.setNombre("d-imagen-3");
+        Imagen imd4 = new Imagen("imagenes/d-imagen-4.jpg","descripcion corta","Hilton Colon",cam2,fecha1);
+        imd4.setNombre("d-imagen-4");
+        Imagen imd5 = new Imagen("imagenes/d-imagen-5.jpg","descripcion corta","Porto",cam2,fecha1);
+        imd5.setNombre("d-imagen-5");
+        Imagen imd6 = new Imagen("imagenes/d-imagen-6.jpg","descripcion corta","Vista Sol",cam2,fecha1);
+        imd6.setNombre("d-imagen-6");
+        Imagen imd7 = new Imagen("imagenes/d-imagen-7.jpg","descripcion corta","Ciudad Celeste",cam2,fecha1);
+        imd7.setNombre("d-imagen-7");
+        Imagen imd8 = new Imagen("imagenes/d-imagen-8.jpg","descripcion corta","Quito",cam2,fecha1);
+        imd8.setNombre("d-imagen-8");
+        Imagen imd9 = new Imagen("imagenes/d-imagen-9.jpg","descripcion corta","Milagro",cam2,fecha1);
+        imd9.setNombre("d-imagen-9");
+        
+        Album album2 = new Album("Favoritas Diego", "Fotos favoritas de Diego Martinez");
+        albunes.addLast(album2);
+        album2.agregarImagen(imd1);
+        album2.agregarImagen(imd2);
+        album2.agregarImagen(imd3);
+        album2.agregarImagen(imd4);
+        album2.agregarImagen(imd5);
+        album2.agregarImagen(imd6);
+        album2.agregarImagen(imd7);
+        album2.agregarImagen(imd8);
+        album2.agregarImagen(imd9);
+        
 
     }
     
