@@ -21,10 +21,15 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" layoutY="729.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="658.0" layoutY="71.0" stroke="TRANSPARENT" strokeType="INSIDE" width="41.0" />
-      <VBox layoutX="930.0" layoutY="254.0" spacing="15.0">
+      <VBox layoutX="930.0" layoutY="254.0" spacing="6.0">
          <children>
-            <Label text="Etiquetas:" />
-            <Label fx:id="lbEtiquetas" prefHeight="19.0" prefWidth="321.0" text="Label" visible="false" />
+            <HBox prefHeight="0.0" prefWidth="321.0" spacing="60.0">
+               <children>
+                  <Label text="Etiquetas:" />
+                  <Button mnemonicParsing="false" onAction="#agregarEtiqueta" text="Añadir Etiqueta" />
+               </children>
+            </HBox>
+            <Label fx:id="lbEtiquetas" prefHeight="19.0" prefWidth="321.0" />
          </children>
       </VBox>
       <VBox layoutX="930.0" layoutY="123.0" prefHeight="57.0" prefWidth="319.0" spacing="10.0">

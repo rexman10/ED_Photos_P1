@@ -304,6 +304,7 @@ public class PrincipalMenuController implements Initializable {
         rbSad.setSelected(false);
         
         listaComentarios.getItems().clear();
+        lbEtiquetas.setText("");
         
         currentImagen = imagen;
         System.out.println(currentImagen.getNombre());
@@ -327,6 +328,14 @@ public class PrincipalMenuController implements Initializable {
             for(String p: imagen.getPersonas()){
                 listaComentarios.getItems().add(p);
             }
+        }
+        
+        if(!imagen.getKeywords().isEmpty()){
+            String texto="";
+            for(String p: imagen.getKeywords()){
+                texto+="#"+p;
+            } 
+            lbEtiquetas.setText(texto);
         }
     }
 
@@ -500,6 +509,7 @@ public class PrincipalMenuController implements Initializable {
         lbCamara.setText("");
         lbFecha.setText("");
         listaComentarios.getItems().clear();
+        lbEtiquetas.setText("");
     }
 
     @FXML
@@ -724,6 +734,50 @@ public class PrincipalMenuController implements Initializable {
             List<String> personas=currentImagen.getPersonas();
             personas.addLast(com);
             currentImagen.setPersonas(personas);
+        }
+   
+    }
+    
+    @FXML
+    private void agregarEtiqueta() {
+        if(currentImagen==null){
+            App.mostrarAlerta(Alert.AlertType.ERROR, "No se ha seleccionado ninguna foto");
+        }else{
+            try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("etiqueta.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            //aggPremio();
+            
+            String key=EtiquetaController.keyword;
+            EtiquetaController.keyword=null;
+            aggKeyword(key);
+            
+           
+            
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        
+    }
+    
+    private void aggKeyword(String key){
+        if(!key.isEmpty()){
+            String texto=lbEtiquetas.getText();
+            texto+="#"+key;
+            lbEtiquetas.setText(texto);
+            
+            
+            
+            //listaComentarios.getItems().add(com);
+            App.mostrarAlerta(Alert.AlertType.INFORMATION,"Etiqueta añadido con éxito");
+            List<String> etiquetas=currentImagen.getKeywords();
+            etiquetas.addLast(key);
+            currentImagen.setKeywords(etiquetas);
         }
    
     }
