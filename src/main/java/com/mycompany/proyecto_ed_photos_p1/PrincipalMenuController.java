@@ -45,6 +45,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -113,17 +114,17 @@ public class PrincipalMenuController implements Initializable {
     @FXML
     private ToggleGroup filtro;
     @FXML
-    private VBox filtroSimple;
+    private HBox filtroSimple;
     @FXML
     private ComboBox<String> cbParametros1;
     @FXML
-    private VBox filtroCompuesto;
+    private HBox filtroCompuesto;
     @FXML
     private ComboBox<String> cbParametros2;
     @FXML
-    private Button btnFiltroSimple;
+    private TextField txtParametro1;
     @FXML
-    private Button btnFiltroCompuesto;
+    private TextField txtParametro2;
     @FXML
     private RadioButton rbFiltroSimple;
     @FXML
@@ -217,13 +218,13 @@ public class PrincipalMenuController implements Initializable {
         @FXML
     private void setFiltroSimple(ActionEvent event) {
         cbParametros2.setDisable(true);
-        btnFiltroCompuesto.setDisable(true);
+        //btnFiltroCompuesto.setDisable(true);
     }
 
     @FXML
     private void setFiltroCompuesto(ActionEvent event) {
         cbParametros2.setDisable(false);
-        btnFiltroCompuesto.setDisable(false);
+       // btnFiltroCompuesto.setDisable(false);
     }
 
     @FXML

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -143,24 +144,20 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="filtroSimple" layoutX="234.0" layoutY="7.0" spacing="15.0">
-         <children>
-            <Label text="Parámetro:" />
-            <ComboBox fx:id="cbParametros1" prefWidth="150.0" />
-         </children>
-      </VBox>
-      <VBox fx:id="filtroCompuesto" layoutX="401.0" layoutY="7.0" spacing="15.0">
-         <children>
-            <Label text="Parámetro:" />
-            <ComboBox fx:id="cbParametros2" disable="true" prefWidth="150.0" />
-         </children>
-      </VBox>
-      <VBox alignment="CENTER_LEFT" layoutX="568.0" layoutY="8.0" spacing="7.0">
-         <children>
-            <Button fx:id="btnFiltroSimple" mnemonicParsing="false" text="Agregar filtro simple" />
-            <Button fx:id="btnFiltroCompuesto" disable="true" mnemonicParsing="false" text="Agregar filtro compuesto" />
-         </children>
-      </VBox>
       <Button fx:id="btnFiltrar" layoutX="776.0" layoutY="28.0" mnemonicParsing="false" onAction="#filtrarImagenes" text="Filtrar Imagenes" />
+      <HBox fx:id="filtroSimple" layoutX="238.0" layoutY="6.0" prefHeight="31.0" prefWidth="468.0" spacing="30.0">
+         <children>
+            <Label text="Parámetro1:" />
+            <ComboBox fx:id="cbParametros1" prefWidth="150.0" />
+            <TextField fx:id="txtParametro1" prefHeight="31.0" prefWidth="174.0" />
+         </children>
+      </HBox>
+      <HBox fx:id="filtroCompuesto" layoutX="238.0" layoutY="41.0" prefHeight="31.0" prefWidth="468.0" spacing="20.0">
+         <children>
+            <Label text="Parámetro 2:" />
+            <ComboBox fx:id="cbParametros2" prefWidth="150.0" />
+            <TextField fx:id="txtParametro2" prefHeight="31.0" prefWidth="174.0" />
+         </children>
+      </HBox>
    </children>
 </Pane>
