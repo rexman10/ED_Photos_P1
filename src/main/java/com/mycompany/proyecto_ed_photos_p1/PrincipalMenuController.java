@@ -380,13 +380,12 @@ public class PrincipalMenuController implements Initializable {
         }
         galeria.getChildren().clear();
         displayImages(fotos);
-        //return fotos;
     }
 
     //Busqueda Compleja
     public void showPeopleIn(List<String> p, String place, Album a) {
         List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+        CircularDoubleLinkedList<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         for (Imagen i : l) {
             int numPer = 0;
@@ -400,12 +399,13 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         galeria.getChildren().clear();
+        displayImages(fotos);
     }
 
     //Búsqueda por Hashtag(s)
     public void showPerHashtags(List<String> lHashtag, Album a) {
         List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+        CircularDoubleLinkedList<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         for (Imagen i : l) {
             int numHash = 0;
@@ -419,12 +419,13 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         galeria.getChildren().clear();
+        displayImages(fotos);
     }
 
     //Búsqueda por Descripción
     public void showPerDescription(List<String> searchD, Album a) {
         List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+        CircularDoubleLinkedList<Imagen> fotos = new CircularDoubleLinkedList<>();
 
         int numDesc = 0;
         for (Imagen i : l) {
@@ -439,6 +440,7 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         galeria.getChildren().clear();
+        displayImages(fotos);
     }
 
     //Búsqueda por Reacciones
@@ -458,7 +460,7 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         galeria.getChildren().clear();
-
+        displayImages(imagePerR.get(searchR));
     }
 
     //Búsqueda por Marca o Modelo de Cámara
