@@ -63,7 +63,7 @@ public class CrearAlbumController implements Initializable {
         if (nombre.equals("") || desc.equals("")) {
             throw new EmptyFieldException();
         }
-        System.out.println("entre a crear album sin error xdc");
+        //System.out.println("entre a crear album sin error xdc");
         Album nuevo = new Album(nombre, desc);
         App.albunes.addLast(nuevo);
         App.mostrarAlerta(AlertType.INFORMATION, "Album "+nombre+" creado exitosamente");
@@ -75,6 +75,38 @@ public class CrearAlbumController implements Initializable {
         } catch (IOException a) {
             a.getStackTrace();
         }
+    }
+    
+    @FXML
+    public void editarAlbum(Album album){
+
+        try {
+        String nombre = txtNombre.getText();
+        String desc = txtDescripcion.getText();
+        album.setNombre(nombre);
+        album.setDescription(desc);
+        
+        if (nombre.equals("") || desc.equals("")) {
+            throw new EmptyFieldException();
+        }
+        App.mostrarAlerta(AlertType.INFORMATION, "Album "+nombre+" creado exitosamente");
+        cerrarVentana();
+        App.setRoot("principalMenu");
+        
+        } catch (EmptyFieldException e) {
+            App.mostrarAlerta(AlertType.ERROR, "Porfavor asegurese de llenar los campos");
+        } catch (IOException a) {
+            a.getStackTrace();
+        }
+    }
+    
+    @FXML
+    public void llenarCampos(Album album){
+        txtNombre.setText(album.getNombre());
+        txtDescripcion.setText(album.getDescription());
+        btnCrearAlbum.setText("Editar");
+        lbTitulo.setText("Editar Album");
+        btnCrearAlbum.setOnAction(e -> editarAlbum(album));
     }
 
     @FXML

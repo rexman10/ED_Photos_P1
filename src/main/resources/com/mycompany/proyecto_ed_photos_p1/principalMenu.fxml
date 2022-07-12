@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="801.0" layoutX="874.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="41.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" layoutY="729.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
@@ -68,8 +68,8 @@
             </HBox>
             <HBox alignment="TOP_CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="btnEliminarAlbun" mnemonicParsing="false" text="Eliminar Album" />
-                  <Button fx:id="btnEliminarAlbum" mnemonicParsing="false" text="Editar Album" />
+                  <Button fx:id="btnEliminarAlbun" mnemonicParsing="false" onAction="#eliminarAlbum" text="Eliminar Album" />
+                  <Button fx:id="btnEliminarAlbum" mnemonicParsing="false" onAction="#edicionAlbum" text="Editar Album" />
                </children>
             </HBox>
          </children>
@@ -102,9 +102,10 @@
             <Label fx:id="lbPersonas" text="Label" visible="false" />
          </children>
       </VBox>
-      <VBox layoutX="1106.0" layoutY="325.0" prefHeight="49.0" prefWidth="153.0" spacing="15.0">
+      <VBox layoutX="1106.0" layoutY="325.0" prefHeight="49.0" prefWidth="153.0" spacing="2.0">
          <children>
             <Label text="Camara:" />
+            <Button fx:id="btAdministrarCamaras" mnemonicParsing="false" onAction="#switchToAdminCamaras" text="Administrar Camaras" />
             <Label fx:id="lbCamara" prefHeight="17.0" prefWidth="157.0" />
          </children>
       </VBox>
@@ -156,16 +157,16 @@
       <Button fx:id="btnFiltrar" layoutX="776.0" layoutY="28.0" mnemonicParsing="false" onAction="#filtrarImagenes" text="Filtrar Imagenes" />
       <HBox fx:id="filtroSimple" layoutX="238.0" layoutY="6.0" prefHeight="31.0" prefWidth="468.0" spacing="30.0">
          <children>
-            <Label text="Parámetro1:" />
+            <Label text="Parámetro 1:" />
             <ComboBox fx:id="cbParametros1" prefWidth="150.0" />
             <TextField fx:id="txtParametro1" prefHeight="31.0" prefWidth="174.0" />
          </children>
       </HBox>
-      <HBox fx:id="filtroCompuesto" layoutX="238.0" layoutY="41.0" prefHeight="31.0" prefWidth="468.0" spacing="20.0">
+      <HBox fx:id="filtroCompuesto" layoutX="238.0" layoutY="41.0" prefHeight="31.0" prefWidth="468.0" spacing="30.0">
          <children>
             <Label text="Parámetro 2:" />
-            <ComboBox fx:id="cbParametros2" prefWidth="150.0" />
-            <TextField fx:id="txtParametro2" prefHeight="31.0" prefWidth="174.0" />
+            <ComboBox fx:id="cbParametros2" disable="true" prefWidth="150.0" />
+            <TextField fx:id="txtParametro2" disable="true" prefHeight="31.0" prefWidth="174.0" />
          </children>
       </HBox>
    </children>

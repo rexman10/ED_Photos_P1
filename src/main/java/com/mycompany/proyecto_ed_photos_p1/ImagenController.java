@@ -160,15 +160,34 @@ public class ImagenController implements Initializable {
         //PROCESO PARA CREAR CAMARA DE LA IMAGEN
         String modelo= txtModeloC.getText(); //string modelo de la camara
         String marca= txtMarcaC.getText(); //string marca de la camara
-        Camara camara= new Camara(modelo,marca);//CAMARA CREADA
-        
-        Imagen imagen= new Imagen(ruta,desc,lugar,camara,fecha);
+        Camara nuevo = new Camara(modelo,marca);//CAMARA CREADA
+        System.out.println(encontrarCamara(nuevo));
+        if (encontrarCamara(nuevo) == -1){
+            App.listadoCamaras.addLast(nuevo);
+            Imagen imagen= new Imagen(ruta,desc,lugar,nuevo,fecha);
+        } 
+        Imagen imagen= new Imagen(ruta,desc,lugar,App.listadoCamaras.get(encontrarCamara(nuevo)),fecha);
         imagen.setNombre(foto);
         comboAlbum.getValue().agregarImagen(imagen);
         System.out.println("IMAGEN AGREGADA AL ALBUM: "+comboAlbum.getValue());
         App.mostrarAlerta(Alert.AlertType.INFORMATION, "Nueva imagen agregada exitosamente al albúm: "+comboAlbum.getValue());
         App.setRoot("principalMenu");
+        System.out.println("tamanio: "+App.listadoCamaras.size());
+        for (Camara camara : App.listadoCamaras){
+            System.out.println(camara.getMarca() + " - " + camara.getModelo());
+        }
         
+    }
+    
+    public static int encontrarCamara(Camara cam){
+        int indice = 0;
+        for (Camara camara : App.listadoCamaras){
+            if (cam.getModelo().equals(camara.getModelo()) && cam.getMarca().equals(camara.getMarca())){
+                return indice;
+            }
+            indice++;
+        }
+        return -1;           
     }
 
     public void llenarCampos(Imagen imagen, Album album) {

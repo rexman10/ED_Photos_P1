@@ -44,7 +44,7 @@ public class Album implements Serializable {
     public void setContenido(List<Imagen> contenido) {
         this.contenido = contenido;
     }
-
+    
     @Override
     public String toString(){
         return getNombre();

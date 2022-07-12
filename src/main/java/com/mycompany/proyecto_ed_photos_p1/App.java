@@ -35,6 +35,7 @@ public class App extends Application {
 
     private static Scene scene;
     public static ArrayList<Album> albunes = new ArrayList<>();
+    public static List<Camara> listadoCamaras = new ArrayList<>();
 
 
     
@@ -51,7 +52,7 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
@@ -70,7 +71,7 @@ public class App extends Application {
     }
 
     public static void cargarBaseDatos(){
-        Camara cam1 = new Camara("Cannon","J25");
+        Camara cam1 = new Camara("J25","Cannon");
         DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fecha1 = LocalDate.now();
         String a = fecha1.format(f1);
@@ -107,7 +108,7 @@ public class App extends Application {
         album1.agregarImagen(im5);
         */
         
-        Camara cam2 = new Camara("Cannon","H95");
+        Camara cam2 = new Camara("H95","Cannon");
         Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","descripcion corta","Guayaquil",cam2,fecha1);
         imd1.setNombre("d-imagen-1");
         Imagen imd2 = new Imagen("imagenes/d-imagen-2.jpg","descripcion corta","Vista Sol",cam2,fecha1);
@@ -126,6 +127,9 @@ public class App extends Application {
         imd8.setNombre("d-imagen-8");
         Imagen imd9 = new Imagen("imagenes/d-imagen-9.jpg","descripcion corta","Milagro",cam2,fecha1);
         imd9.setNombre("d-imagen-9");
+        
+        listadoCamaras.addLast(cam1);
+        listadoCamaras.addLast(cam2);
         
         Album album2 = new Album("Favoritas Diego", "Fotos favoritas de Diego Martinez");
         albunes.addLast(album2);

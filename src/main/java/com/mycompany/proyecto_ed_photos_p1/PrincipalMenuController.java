@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import javafx.beans.Observable;
@@ -40,7 +41,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -138,6 +141,8 @@ public class PrincipalMenuController implements Initializable {
     private CircularDoubleLinkedList<Imagen> imagenesAlbum= new CircularDoubleLinkedList();
     @FXML
     private ListView<String> listaComentarios;
+    @FXML
+    private Button btAdministrarCamaras;
 
     /**
      * Initializes the controller class.
@@ -159,7 +164,12 @@ public class PrincipalMenuController implements Initializable {
         llenarComboP1();
         llenarComboP2();
     }    
-
+    
+    @FXML
+    private void switchToAdminCamaras(ActionEvent event) throws IOException  {
+        App.setRoot("tablaCamaras");
+    }
+    
     @FXML
     private void setVistaGrid(ActionEvent event) {
         resetCurrentImagen();
@@ -221,13 +231,13 @@ public class PrincipalMenuController implements Initializable {
         @FXML
     private void setFiltroSimple(ActionEvent event) {
         cbParametros2.setDisable(true);
-        //btnFiltroCompuesto.setDisable(true);
+        txtParametro2.setDisable(true);
     }
 
     @FXML
     private void setFiltroCompuesto(ActionEvent event) {
         cbParametros2.setDisable(false);
-       // btnFiltroCompuesto.setDisable(false);
+        txtParametro2.setDisable(false);
     }
 
     @FXML
@@ -252,11 +262,49 @@ public class PrincipalMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void edicionAlbum(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("crearAlbum.fxml"));
+            CrearAlbumController ct = new CrearAlbumController();
+            fxmlLoader.setController(ct);
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("Edicion Album");
+            ct.llenarCampos(cbAlbum.getValue());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+        
+    @FXML
+    public void eliminarAlbum(){
+        Album seleccionado = cbAlbum.getValue();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Eliminar un album");
+        alert.setHeaderText("Notificacion");
+        alert.setContentText("Esta seguro que desea eliminar el album " + seleccionado.getNombre()+"?");
+    
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            int indice = App.albunes.indexOf(seleccionado);
+            App.albunes.remove(indice);
+            System.out.println(App.albunes);
+            actualizarAlbumes();
+        }
 
+    }
+    
     public void actualizarAlbumes(){
         if (!App.albunes.isEmpty()) {
+            cbAlbum.getItems().clear();
             for (Album album : App.albunes) {
-                System.out.println(album.getNombre());
+                //System.out.println(album.getNombre());
                 cbAlbum.getItems().add(album);
             }
         cbAlbum.setValue(App.albunes.getLast());
@@ -278,12 +326,12 @@ public class PrincipalMenuController implements Initializable {
         Label titulo = new Label(imagen.getNombre());
         try {
             String fileName = imagen.getPath();
-            System.out.println(fileName);
+            //System.out.println(fileName);
             input = App.class.getResource(fileName).openStream();
             //crear la imagen 
             Image nuevo = new Image(input, 100, 100, true, false);
             ImageView view = new  ImageView(nuevo);
-            System.out.println("imagen "+imagen.getPath()+" cargada");
+            //System.out.println("imagen "+imagen.getPath()+" cargada");
             view.setFitHeight(150);
             view.setPreserveRatio(true);
             recuadro.getChildren().addAll(view,titulo);
@@ -309,7 +357,7 @@ public class PrincipalMenuController implements Initializable {
         currentImagen = imagen;
         System.out.println(currentImagen.getNombre());
         lbLugar.setText(imagen.getLugar());
-        lbCamara.setText("Marca: "+imagen.getCamara().getMarca()+" - Modelo: "+imagen.getCamara().getModelo());
+        lbCamara.setText(imagen.getCamara().getMarca()+" - "+imagen.getCamara().getModelo());
         lbFecha.setText(imagen.getFecha_tomada().format(DateTimeFormatter.ISO_DATE));
         
         if(imagen.getReaccion() != null){
@@ -351,6 +399,9 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     public void mostrarAlbum(){
+        rbLike.setSelected(false);
+        rbLove.setSelected(false);
+        rbSad.setSelected(false);
         galeria.getChildren().clear();
         resetCurrentImagen();
 

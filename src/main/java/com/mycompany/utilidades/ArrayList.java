@@ -27,58 +27,59 @@ public class ArrayList<E> implements List<E>{
         capacity *= 2;
     }
     
-    public void concat(E[] e) throws ConcatException {
-        if (e != null) {
-            if ((this.size() + e.length) > this.capacity) {
-                this.addCapacity();
+    public void concat(ArrayList<E> newArrayList) {
+        // Verificamos que el ArrayList recibido no sea null ...(1)
+        if (newArrayList != null) {
+            //Recorremos el ArrayList entrante
+            for (int i = 0; i < newArrayList.size(); i++) {
+                //Si nuestro ArrayList local se llena ...(2)
+                if (isFull()) {
+                    //(2)...aumentamos su capacidad 
+                    addCapacity();
+                }
+                //Concatenamos al final del arreglo local
+                //los elementos del arreglo entrante
+                elements[effectiveSize++] = newArrayList.get(i);
             }
-            for (int i = this.size(), j = 0; i < (this.size() + e.length) - 1 && j < e.length; i++, j++) {
-                this.elements[i] = e[j];
-            }
-
         } else {
-            throw new ConcatException("");
+            // (1)... caso contrario lanzamos una excepción 
+            throw new NullPointerException();
         }
     }
     
     
     @Override
-    public boolean addFirst(E e) {
-        if (e == null) {
+    public boolean addFirst(E element) {
+        if (element == null) {
             return false;
         } else if (isEmpty()) {
-            elements[effectiveSize++] = e;
+            elements[effectiveSize++] = element;
             return true;
-        } else if (isFull()) {
+        } else if (capacity == effectiveSize) {
             addCapacity();
         }
-        // desplazamiento o bit shifting 
-        for (int i = effectiveSize - 1; i >=0; i--) {
-            elements[i+1] = elements[i]; 
+        for (int i = effectiveSize - 1; i >= 0; i--) {
+            elements[i + 1] = elements[i];
         }
-        elements[0] = e;
+        elements[0] = element;
         effectiveSize++;
         return true;
     }
 
     @Override
-    public boolean addLast(E e) {
-        
-        if (e == null){
+    public boolean addLast(E element) {
+        if (element == null) {
             return false;
-            
-        } else if(isEmpty()){
-            elements[effectiveSize++] = e;
+        } else if (isEmpty()) {
+            elements[effectiveSize++] = element;
             return true;
-           
-        } else {
-            
-            if(isFull()) addCapacity();
-            
-            elements[effectiveSize++] = e;
-            return true;
+        } else if (capacity == effectiveSize) {
+            addCapacity();
         }
-        
+        int index = effectiveSize;
+        elements[index] = element;
+        effectiveSize++;
+        return true;
     }
 
     @Override
@@ -90,25 +91,12 @@ public class ArrayList<E> implements List<E>{
     public E removeFirst() {
         if(isEmpty()) throw new EmptyListException();
         
-        E e = elements[0];
-        
-        for(int i = 0; i<effectiveSize-2; i++){
-            elements[i] = elements[i+1];
-        }
-        
-        elements[--effectiveSize] = null;
-            
-        return e;
+        return remove(0);
     }
 
     @Override
     public E removeLast() {
-        if(isEmpty()) throw new EmptyListException();
-        
-        E e = elements[effectiveSize-1];
-        elements[--effectiveSize] = null;
-        
-        return e;
+        return remove(this.effectiveSize - 1);
     }
 
     @Override
@@ -118,31 +106,26 @@ public class ArrayList<E> implements List<E>{
 
     @Override
     public E remove(int index) {
-        if(isEmpty()) throw new EmptyListException();
-        if(index > effectiveSize-1 || index < -1) throw new IndexOutOfBoundsException("Indice fuera de rango.");
-        if(index == 0) return removeFirst();
-        if(index == -1 || index == effectiveSize-1) return removeLast();
-        
-        E e = elements[index];
-        
-        for(int i = index; i<effectiveSize-2; i++){
-            elements[i] = elements[i+1];
+        E elementToRemove = null;
+        if (this.isEmpty() || index >= this.effectiveSize || index<0) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            elementToRemove = elements[index];
+            for (int i = index; i < this.effectiveSize - 1; i++) {
+                elements[i] = elements[i + 1];
+            }
+            this.effectiveSize--;
         }
-        
-        elements[--effectiveSize] = null;
-        return e;
+        return elementToRemove;
     }
-
+    
     @Override
     public E get(int index) {
-        
-        if(isEmpty()) throw new EmptyListException();
-        if(index > effectiveSize-1 || index < -1) throw new IndexOutOfBoundsException("Indice fuera de rango.");
-        if(index == 0) return elements[0];
-        if(index == -1 || index == effectiveSize-1) return elements[effectiveSize-1];
-        
-        return elements[index];
-        
+        if (index < 0 || index >= this.effectiveSize) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            return elements[index];
+        }
     }
 
     public E getLast(){
@@ -151,10 +134,13 @@ public class ArrayList<E> implements List<E>{
     }
     
     @Override
-    public E set(int index, E e){
-        E nuevo = get(index);
-        elements[index] = e;
-        return nuevo;
+    public E set(int index, E element) {
+        if (index < 0 || index >= this.effectiveSize) {
+            throw new IndexOutOfBoundsException();
+        }
+        E oldElement = elements[index];
+        elements[index] = element;
+        return oldElement;
     }
 
     @Override
