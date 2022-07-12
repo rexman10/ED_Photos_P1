@@ -135,6 +135,50 @@ public class App extends Application {
         personas.addLast("Isabella Vergara");
         imd5.setPersonas(personas);
         
+        List<String> personas2=new ArrayList();
+        personas2.addLast("Diego Martinez");
+        personas2.addLast("Jorge Martinez");
+        personas2.addLast("Andrea Martinez");
+        imd1.setPersonas(personas2);
+        
+        List<String> personas3=new ArrayList();
+        personas3.addLast("Diego Martinez");
+        personas3.addLast("Arianna Correa");
+        personas3.addLast("Michael Velastegui");
+        imd2.setPersonas(personas3);
+        
+        List<String> personas4=new ArrayList();
+        personas4.addLast("Diego Martinez");
+        personas4.addLast("Isabella Vergara");
+        imd4.setPersonas(personas4);
+        
+        List<String> personas5=new ArrayList();
+        personas5.addLast("Diego Martinez");
+        personas5.addLast("Andrea Martinez");
+        personas5.addLast("Edith Mendia");
+        imd3.setPersonas(personas5);
+        
+        List<String> personas6=new ArrayList();
+        personas6.addLast("Diego Martinez");
+        personas6.addLast("Arianna Correa");
+        imd6.setPersonas(personas6);
+        
+        List<String> personas7=new ArrayList();
+        personas7.addLast("Diego Martinez");
+        personas7.addLast("Andrea Martinez");
+        personas7.addLast("Jorge Martinez");
+        imd7.setPersonas(personas7);
+        
+        List<String> personas8=new ArrayList();
+        personas8.addLast("Diego Martinez");
+        personas8.addLast("Margarita Mendia");
+        imd8.setPersonas(personas8);
+        
+        List<String> personas9=new ArrayList();
+        personas9.addLast("Diego Martinez");
+        personas9.addLast("Margarita Mendia");
+        imd9.setPersonas(personas9);
+        
         listadoCamaras.addLast(cam1);
         listadoCamaras.addLast(cam2);
         

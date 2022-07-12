@@ -352,6 +352,7 @@ public class PrincipalMenuController implements Initializable {
                 boolean gotKey = imagePerPl.containsKey(place);
                 if (gotKey) {
                     imagePerPl.get(place).addLast(i);
+                    
                 } else {
                     CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
@@ -474,9 +475,11 @@ public class PrincipalMenuController implements Initializable {
                 boolean gotKey = imagePerCam.containsKey(searchC);
                 if (gotKey) {
                     imagePerCam.get(searchC).addLast(i);
+                    System.out.println("NUEVO   "+i.getNombre());
                 } else {
                     CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
+                    System.out.println("VIEJO   "+i.getNombre());
                     imagePerCam.put(searchC, newList);
                 }
             }
