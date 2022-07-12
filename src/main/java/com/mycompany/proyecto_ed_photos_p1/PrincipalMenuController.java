@@ -139,6 +139,8 @@ public class PrincipalMenuController implements Initializable {
     private Label lbFecha;
     
     private CircularDoubleLinkedList<Imagen> imagenesAlbum= new CircularDoubleLinkedList();
+    private CircularDoubleLinkedList<Imagen> imagesDisplayed = null;
+    
     @FXML
     private ListView<String> listaComentarios;
     @FXML
@@ -160,9 +162,7 @@ public class PrincipalMenuController implements Initializable {
             pFullview.setVisible(true);
         }
         mostrarAlbum();
-        
         llenarComboP1();
-        llenarComboP2();
     }    
     
     @FXML
@@ -228,23 +228,281 @@ public class PrincipalMenuController implements Initializable {
         }
     }
     
-        @FXML
+    @FXML
     private void setFiltroSimple(ActionEvent event) {
         cbParametros2.setDisable(true);
         txtParametro2.setDisable(true);
+        cbParametros1.getItems().clear();
+        String s = filtro.getSelectedToggle().toString();
+        String t = rbFiltroSimple.toString();
+        if (s.equals(t)) {
+            cbParametros1.getItems().add("Personas");
+            cbParametros1.getItems().add("Lugar");
+            cbParametros1.getItems().add("Fecha");
+            cbParametros1.getItems().add("Cámara");
+            cbParametros1.getItems().add("Hashtags");
+            cbParametros1.getItems().add("Descripcion");
+            cbParametros1.getItems().add("Reaccion");
+        }
     }
 
     @FXML
     private void setFiltroCompuesto(ActionEvent event) {
         cbParametros2.setDisable(false);
         txtParametro2.setDisable(false);
+        cbParametros1.getItems().clear();
+        cbParametros1.getItems().add("Personas");
+        cbParametros1.getItems().add("Lugar");
+    }
+
+    @FXML
+    private void llenarCompuesta(ActionEvent event) {
+        String s = cbParametros1.getSelectionModel().getSelectedItem();
+        cbParametros2.getItems().clear();
+        if (s.equals("Personas")) {
+            cbParametros2.getItems().add("Lugar");
+        } else {
+            cbParametros2.getItems().add("Personas");
+        }
     }
 
     @FXML
     private void filtrarImagenes(ActionEvent event) {
-        System.out.println("nada de momento");
+        Album a = cbAlbum.getSelectionModel().getSelectedItem();
+        if (rbFiltroSimple.isSelected()) {
+            String s = cbParametros1.getSelectionModel().getSelectedItem();
+            String t = txtParametro1.getText();
+            if (s.equals("Personas")) {
+                showPeople(toLista(t), a);
+            } else if (s.equals("Hashtags")) {
+                showPerHashtags(toLista(t), a);
+            } else if (s.equals("Descripción")) {
+                showPerDescription(toLista2(t), a);
+            } else if (s.equals("Lugar")) {
+                showPerPlace(t, a);
+            } else if (s.equals("Fecha")) {
+                showPerDate(t, a);
+            } else if (s.equals("Camara")) {
+                showPerCamara(t, a);
+            } else if (s.equals("Reaccion")) {
+                showPerReaction(t, a);
+            }
+        } else {
+            String s = cbParametros1.getSelectionModel().getSelectedItem();
+            String t1 = txtParametro1.getText();
+            String t2 = txtParametro2.getText();
+            if (s.equals("Personas")) {
+                showPeopleIn(toLista(t1), t2, a);
+            } else if (s.equals("Lugar")) {
+                showPeopleIn(toLista(t2), t1, a);
+            }
+        }
     }
     
+    private List<String> toLista(String text) {
+        List<String> lista = new ArrayList<>();
+        if (text.contains("-")) {
+            String[] parts = text.split("-");
+            for (String p : parts) {
+                lista.addLast(p);
+            }
+        }else {
+            lista.addLast(text);
+        }
+        return lista;
+    }
+
+    private List<String> toLista2(String text) {
+        List<String> lista = new ArrayList<>();
+        if (text.contains(" ")) {
+            String[] parts = text.split(" ");
+            for (String p : parts) {
+                lista.addLast(p);
+            }
+        } else {
+            lista.addLast(text);
+        }
+        return lista;
+    }
+    
+    public void llenarComboP1() {
+        cbParametros1.getItems().add("Personas");
+        cbParametros1.getItems().add("Lugar");
+        cbParametros1.getItems().add("Fecha");
+        cbParametros1.getItems().add("Cámara");
+        cbParametros1.getItems().add("Hashtags");
+        cbParametros1.getItems().add("Descripcion");
+        cbParametros1.getItems().add("Reaccion");
+    }
+    
+   private void displayImages(CircularDoubleLinkedList<Imagen> images) {
+        imagesDisplayed = images;
+        for (Imagen i : images) {
+            Pane imageView = crearVistaImagen(i);
+            galeria.getChildren().addAll(imageView);
+        }
+    }
+
+    //Busqueda Simple
+    public void showPerPlace(String place, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerPl = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getLugar().equals(place)) {
+                boolean gotKey = imagePerPl.containsKey(place);
+                if (gotKey) {
+                    imagePerPl.get(place).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerPl.put(place, newList);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+        displayImages(imagePerPl.get(place));
+    }
+
+    public void showPeople(List<String> p, Album a) {
+        List<Imagen> l = a.getContenido();
+        CircularDoubleLinkedList<Imagen> fotos = new CircularDoubleLinkedList<>();
+        System.out.println(p.size());
+        for (Imagen i : l) {
+            int numPer = 0;
+            for (String persona : p ) {
+                if (i.getPersonas().contains(persona)) {
+                    numPer++;
+                }
+                if (numPer == p.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+        displayImages(fotos);
+        //return fotos;
+    }
+
+    //Busqueda Compleja
+    public void showPeopleIn(List<String> p, String place, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+
+        for (Imagen i : l) {
+            int numPer = 0;
+            for (String persona : p ) {
+                if (i.getPersonas().contains(persona)) {
+                    numPer++;
+                }
+                if (numPer == p.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+    }
+
+    //Búsqueda por Hashtag(s)
+    public void showPerHashtags(List<String> lHashtag, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+
+        for (Imagen i : l) {
+            int numHash = 0;
+            for (String keyword : lHashtag) {
+                if (i.getKeywords().contains(keyword)) {
+                    numHash++;
+                }
+                if (numHash == lHashtag.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+    }
+
+    //Búsqueda por Descripción
+    public void showPerDescription(List<String> searchD, Album a) {
+        List<Imagen> l = a.getContenido();
+        List<Imagen> fotos = new CircularDoubleLinkedList<>();
+
+        int numDesc = 0;
+        for (Imagen i : l) {
+            int numHash = 0;
+            for (String word : searchD) {
+                if (i.getDescription().contains(word)) {
+                    numHash++;
+                }
+                if (numHash == searchD.size()) {
+                    fotos.addLast(i);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+    }
+
+    //Búsqueda por Reacciones
+    public void showPerReaction(String searchR, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerR = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            if (i.getReaccion().equals(searchR)) {
+                boolean gotKey = imagePerR.containsKey(searchR);
+                if (gotKey) {
+                    imagePerR.get(searchR).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerR.put(searchR, newList);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+
+    }
+
+    //Búsqueda por Marca o Modelo de Cámara
+    public void showPerCamara(String searchC, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerCam = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            String marca = i.getCamara().getMarca();
+            String modelo = i.getCamara().getModelo();
+            if (marca.equals(searchC) || modelo.equals(searchC)) {
+                boolean gotKey = imagePerCam.containsKey(searchC);
+                if (gotKey) {
+                    imagePerCam.get(searchC).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerCam.put(searchC, newList);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+        displayImages(imagePerCam.get(searchC));
+    }
+
+    //Busqueda por fecha year-month-day
+    public void showPerDate(String date, Album a) {
+        Map<String, CircularDoubleLinkedList<Imagen>> imagePerDate = new TreeMap<>();
+
+        for (Imagen i : a.getContenido()) {
+            String fechaFoto = i.getFecha_tomada().toString();
+            if (fechaFoto.equals(date)) {
+                boolean gotKey = imagePerDate.containsKey(date);
+                if (gotKey) {
+                    imagePerDate.get(date).addLast(i);
+                } else {
+                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
+                    newList.addLast(i);
+                    imagePerDate.put(date, newList);
+                }
+            }
+        }
+        galeria.getChildren().clear();
+        displayImages(imagePerDate.get(date));
+    }
 
     @FXML
     private void crearAlbum(ActionEvent event){
@@ -579,178 +837,7 @@ public class PrincipalMenuController implements Initializable {
                 currentImagen.setReaccion("Me entristece");
             }
         }
-    }
-    
-    public void llenarComboP1(){
-        cbParametros1.getItems().add("Personas");
-        cbParametros1.getItems().add("Lugar");
-        cbParametros1.getItems().add("Fecha");
-        cbParametros1.getItems().add("Cámara");
-        cbParametros1.getItems().add("Hashtags");
-        cbParametros1.getItems().add("Descripcion");
-        cbParametros1.getItems().add("Reaccion");
-    }
-    
-    public void llenarComboP2(){
-        cbParametros2.getItems().add("Personas");
-        cbParametros2.getItems().add("Lugar");
-    }
-        //Busqueda Simple
-    
-    public void showPerPlace(String place, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerPl = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            if (i.getLugar().equals(place)) {
-                boolean gotKey = imagePerPl.containsKey(place);
-                if (gotKey) {
-                    imagePerPl.get(place).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerPl.put(place, newList);
-                }
-            }
-        }
-    }
-
-    
-    public static void showPeople(List<String> p, Album a) {
-        List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
-
-        for (Imagen i : l) {
-            int numPer = 0;
-            for (String persona : i.getPersonas()) {
-                if (p.contains(persona)) {
-                    numPer++;
-                }
-                if (numPer == p.size()) {
-                    fotos.addLast(i);
-                }
-            }
-        }
-        //return fotos;
-    }
-
-    //Busqueda Compleja
-    public static void showPeopleIn(List<String> p, String place, Album a) {
-        List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
-
-        for (Imagen i : l) {
-            int numPer = 0;
-            for (String persona : i.getPersonas()) {
-                if (p.contains(persona) && i.getLugar().equals(place)) {
-                    numPer++;
-                }
-                if (numPer == p.size()) {
-                    fotos.addLast(i);
-                }
-            }
-        }
-        //return fotos;
-    }
-    
-    //Búsqueda por Hashtag(s)
-    
-    public void showPerHashtags(List<String> lHashtag, Album a) {
-        List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
-
-        for (Imagen i : l) {
-            int numHash = 0;
-            for (String keyword : i.getKeywords()) {
-                if (lHashtag.contains(keyword)) {
-                    numHash++;
-                }
-                if (numHash == lHashtag.size()) {
-                    fotos.addLast(i);
-                }
-            }
-        }
-        //return fotos;
-    }
-   
-    //Búsqueda por Descripción
-    public void showPerDescription(List<String>searchD, Album a) {
-        List<Imagen> l = a.getContenido();
-        List<Imagen> fotos = new CircularDoubleLinkedList<>();
-
-        int numDesc = 0;
-        for (Imagen i : l) {
-            int numHash = 0;
-            for (String word: searchD) {
-                if (i.getDescription().contains(word)) {
-                    numHash++;
-                }
-                if (numHash == searchD.size()) {
-                    fotos.addLast(i);
-                }
-            }
-        }
-        //return fotos;
-    }
-    
-    //Búsqueda por Reacciones
-    public void showPerReaction(String searchR, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerR = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            if (i.getReaccion().equals(searchR)) {
-                boolean gotKey = imagePerR.containsKey(searchR);
-                if (gotKey) {
-                    imagePerR.get(searchR).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerR.put(searchR, newList);
-                }
-            }
-        }
-    }
-    
-    //Búsqueda por Marca o Modelo de Cámara
-    public void showPerCamara(String searchC, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerCam = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            String marca = i.getCamara().getMarca();
-            String modelo = i.getCamara().getModelo();
-            if (marca.equals(searchC) || modelo.equals(searchC)) {
-                boolean gotKey = imagePerCam.containsKey(searchC);
-                if (gotKey) {
-                    imagePerCam.get(searchC).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerCam.put(searchC, newList);
-                }
-            }
-        }
-    }    
-    
-    //Implementar búsquedas que incluyan fechas: Fotos de enero de 2018 ; 
-    //fotos de Andres y Emilio entre Marzo y Julio del 2009; fotos tomadas en Quito en Marzo del 2010.
-    
-    //Busqueda por fecha year-month-day
-    public void showPerDate(String date, Album a) {
-        Map<String, CircularDoubleLinkedList<Imagen>> imagePerDate = new TreeMap<>();
-
-        for (Imagen i : a.getContenido()) {
-            String fechaFoto = i.getFecha_tomada().toString();
-            if (fechaFoto.equals(date)) {
-                boolean gotKey = imagePerDate.containsKey(date);
-                if (gotKey) {
-                    imagePerDate.get(date).addLast(i);
-                } else {
-                    CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
-                    newList.addLast(i);
-                    imagePerDate.put(date, newList);
-                }
-            }
-        }
-    }    
+    }   
 
     @FXML
     private void agregarComentario() {
