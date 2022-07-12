@@ -372,9 +372,9 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         
-        if(!imagen.getPersonas().isEmpty()){
-            for(String p: imagen.getPersonas()){
-                listaComentarios.getItems().add(p);
+        if(!imagen.getComments().isEmpty()){
+            for(String c: imagen.getComments()){
+                listaComentarios.getItems().add(c);
             }
         }
         
@@ -782,9 +782,9 @@ public class PrincipalMenuController implements Initializable {
         if(!com.isEmpty()){
             listaComentarios.getItems().add(com);
             App.mostrarAlerta(Alert.AlertType.INFORMATION,"Comentario añadido con exito");
-            List<String> personas=currentImagen.getPersonas();
-            personas.addLast(com);
-            currentImagen.setPersonas(personas);
+            List<String> comentarios=currentImagen.getComments();
+            comentarios.addLast(com);
+            currentImagen.setComments(comentarios);
         }
    
     }

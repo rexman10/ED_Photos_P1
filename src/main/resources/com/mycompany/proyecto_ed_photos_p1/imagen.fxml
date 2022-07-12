@@ -60,8 +60,8 @@
                      <children>
                         <TableView fx:id="tablaPersonas" prefHeight="124.0" prefWidth="289.0">
                           <columns>
-                            <TableColumn fx:id="colNombres" prefWidth="191.0" text="Nombre" />
-                              <TableColumn fx:id="colOpciones" prefWidth="96.0" text="Opciones" />
+                            <TableColumn fx:id="colNombres" prefWidth="149.0" text="Nombre" />
+                              <TableColumn fx:id="colOpciones" prefWidth="138.0" text="Opciones" />
                           </columns>
                         </TableView>
                         <Button mnemonicParsing="false" onAction="#agregarPersona" text="Agregar Persona" />

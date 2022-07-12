@@ -128,6 +128,13 @@ public class App extends Application {
         Imagen imd9 = new Imagen("imagenes/d-imagen-9.jpg","descripcion corta","Milagro",cam2,fecha1);
         imd9.setNombre("d-imagen-9");
         
+        List<String> personas=new ArrayList();
+        personas.addLast("Diego Martinez");
+        personas.addLast("Michael Velastegui");
+        personas.addLast("Mario Moreira");
+        personas.addLast("Isabella Vergara");
+        imd5.setPersonas(personas);
+        
         listadoCamaras.addLast(cam1);
         listadoCamaras.addLast(cam2);
         
