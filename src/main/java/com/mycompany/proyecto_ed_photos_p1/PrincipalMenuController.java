@@ -241,7 +241,7 @@ public class PrincipalMenuController implements Initializable {
             cbParametros1.getItems().add("Personas");
             cbParametros1.getItems().add("Lugar");
             cbParametros1.getItems().add("Fecha");
-            cbParametros1.getItems().add("Cámara");
+            cbParametros1.getItems().add("Camara");
             cbParametros1.getItems().add("Hashtags");
             cbParametros1.getItems().add("Descripcion");
             cbParametros1.getItems().add("Reaccion");
@@ -280,7 +280,7 @@ public class PrincipalMenuController implements Initializable {
                 showPeople(toLista(t), a);
             } else if (s.equals("Hashtags")) {
                 showPerHashtags(toLista(t), a);
-            } else if (s.equals("Descripción")) {
+            } else if (s.equals("Descripcion")) {
                 showPerDescription(toLista2(t), a);
             } else if (s.equals("Lugar")) {
                 showPerPlace(t, a);
@@ -333,7 +333,7 @@ public class PrincipalMenuController implements Initializable {
         cbParametros1.getItems().add("Personas");
         cbParametros1.getItems().add("Lugar");
         cbParametros1.getItems().add("Fecha");
-        cbParametros1.getItems().add("Cámara");
+        cbParametros1.getItems().add("Camara");
         cbParametros1.getItems().add("Hashtags");
         cbParametros1.getItems().add("Descripcion");
         cbParametros1.getItems().add("Reaccion");
