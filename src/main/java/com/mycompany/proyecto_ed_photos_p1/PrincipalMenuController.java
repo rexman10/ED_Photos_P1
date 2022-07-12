@@ -233,6 +233,8 @@ public class PrincipalMenuController implements Initializable {
         cbParametros2.setDisable(true);
         txtParametro2.setDisable(true);
         cbParametros1.getItems().clear();
+        txtParametro1.clear();
+        txtParametro2.clear();
         String s = filtro.getSelectedToggle().toString();
         String t = rbFiltroSimple.toString();
         if (s.equals(t)) {
@@ -251,6 +253,8 @@ public class PrincipalMenuController implements Initializable {
         cbParametros2.setDisable(false);
         txtParametro2.setDisable(false);
         cbParametros1.getItems().clear();
+        txtParametro1.clear();
+        txtParametro2.clear();
         cbParametros1.getItems().add("Personas");
         cbParametros1.getItems().add("Lugar");
     }
@@ -367,7 +371,6 @@ public class PrincipalMenuController implements Initializable {
     public void showPeople(List<String> p, Album a) {
         List<Imagen> l = a.getContenido();
         CircularDoubleLinkedList<Imagen> fotos = new CircularDoubleLinkedList<>();
-        System.out.println(p.size());
         for (Imagen i : l) {
             int numPer = 0;
             for (String persona : p ) {
@@ -430,10 +433,13 @@ public class PrincipalMenuController implements Initializable {
 
         int numDesc = 0;
         for (Imagen i : l) {
+            System.out.println(i.getDescription());
             int numHash = 0;
             for (String word : searchD) {
                 if (i.getDescription().contains(word)) {
+                    System.out.println(i.getDescription());
                     numHash++;
+                    //System.out.println(i.getDescription().contains(word));
                 }
                 if (numHash == searchD.size()) {
                     fotos.addLast(i);
@@ -475,11 +481,11 @@ public class PrincipalMenuController implements Initializable {
                 boolean gotKey = imagePerCam.containsKey(searchC);
                 if (gotKey) {
                     imagePerCam.get(searchC).addLast(i);
-                    System.out.println("NUEVO   "+i.getNombre());
+                    //System.out.println("NUEVO   "+i.getNombre());
                 } else {
                     CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
-                    System.out.println("VIEJO   "+i.getNombre());
+                    //System.out.println("VIEJO   "+i.getNombre());
                     imagePerCam.put(searchC, newList);
                 }
             }
@@ -498,6 +504,7 @@ public class PrincipalMenuController implements Initializable {
                 boolean gotKey = imagePerDate.containsKey(date);
                 if (gotKey) {
                     imagePerDate.get(date).addLast(i);
+                    //System.out.println("NUEVO "+i.getFecha_tomada());
                 } else {
                     CircularDoubleLinkedList<Imagen> newList = new CircularDoubleLinkedList<Imagen>();
                     newList.addLast(i);
