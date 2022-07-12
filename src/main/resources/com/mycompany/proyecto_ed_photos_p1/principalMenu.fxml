@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="801.0" layoutX="874.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="41.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" layoutY="729.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
@@ -158,7 +158,7 @@
       <HBox fx:id="filtroSimple" layoutX="238.0" layoutY="6.0" prefHeight="31.0" prefWidth="468.0" spacing="30.0">
          <children>
             <Label text="Parámetro 1:" />
-            <ComboBox fx:id="cbParametros1" prefWidth="150.0" />
+            <ComboBox fx:id="cbParametros1" onAction="#llenarCompuesta" prefWidth="150.0" />
             <TextField fx:id="txtParametro1" prefHeight="31.0" prefWidth="174.0" />
          </children>
       </HBox>

@@ -390,7 +390,7 @@ public class PrincipalMenuController implements Initializable {
         for (Imagen i : l) {
             int numPer = 0;
             for (String persona : p ) {
-                if (i.getPersonas().contains(persona)) {
+                if (i.getPersonas().contains(persona)&& i.getLugar().equals(place)) {
                     numPer++;
                 }
                 if (numPer == p.size()) {
