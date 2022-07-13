@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto_ed_photos_p1.PrincipalMenuController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="801.0" layoutX="874.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="41.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="71.0" layoutY="729.0" stroke="TRANSPARENT" strokeType="INSIDE" width="876.0" />
@@ -96,10 +96,10 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="930.0" layoutY="459.0" spacing="15.0">
+      <VBox layoutX="930.0" layoutY="459.0" prefHeight="95.0" prefWidth="294.0" spacing="15.0">
          <children>
-            <Label text="Personas:" />
-            <Label fx:id="lbPersonas" text="Label" visible="false" />
+            <Label prefHeight="10.0" prefWidth="88.0" text="Personas:" />
+            <ListView fx:id="lviewPersonas" prefHeight="65.0" prefWidth="225.0" />
          </children>
       </VBox>
       <VBox layoutX="1106.0" layoutY="325.0" prefHeight="49.0" prefWidth="153.0" spacing="2.0">
@@ -109,20 +109,20 @@
             <Label fx:id="lbCamara" prefHeight="17.0" prefWidth="157.0" />
          </children>
       </VBox>
-      <VBox layoutX="930.0" layoutY="515.0" prefHeight="49.0" prefWidth="126.0" spacing="15.0">
+      <VBox layoutX="930.0" layoutY="566.0" prefHeight="49.0" prefWidth="126.0" spacing="15.0">
          <children>
             <Label text="Fecha:" />
             <Label fx:id="lbFecha" />
          </children>
       </VBox>
-      <VBox layoutX="930.0" layoutY="566.0" spacing="15.0">
+      <VBox layoutX="930.0" layoutY="625.0" prefHeight="154.0" prefWidth="294.0" spacing="15.0">
          <children>
             <Label text="Comentarios:" />
-            <ScrollPane>
+            <ScrollPane prefHeight="77.0" prefWidth="294.0">
                <content>
-                  <VBox prefHeight="148.0" prefWidth="316.0" spacing="10.0">
+                  <VBox prefHeight="148.0" prefWidth="292.0" spacing="10.0">
                      <children>
-                        <ListView fx:id="listaComentarios" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="listaComentarios" prefHeight="53.0" prefWidth="292.0" />
                      </children></VBox>
                </content>
             </ScrollPane>
