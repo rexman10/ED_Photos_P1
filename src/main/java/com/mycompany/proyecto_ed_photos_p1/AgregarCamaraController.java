@@ -7,6 +7,10 @@ package com.mycompany.proyecto_ed_photos_p1;
 
 import com.mycompany.modelo.Camara;
 import com.mycompany.utilidades.List;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -57,6 +61,12 @@ public class AgregarCamaraController implements Initializable {
         }else {
             Camara nueva = new Camara(txtModelo.getText(),txtMarca.getText());
             App.listadoCamaras.addLast(nueva);
+            try (ObjectOutputStream ou = new ObjectOutputStream(new FileOutputStream("serializados/listadoCamaras.ser"))) {
+                System.out.println("serializando al agregar camaras");
+                ou.writeObject(App.listadoCamaras);
+            } catch (IOException e) {
+                e.getMessage();
+            }
             cancelarCamara();                      
         }
     }

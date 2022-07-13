@@ -13,8 +13,10 @@ import static com.mycompany.proyecto_ed_photos_p1.App.*;
 import com.mycompany.utilidades.List;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -157,9 +159,9 @@ public class ImagenController implements Initializable {
         String foto = file.getName();
         String ruta="imagenes/"+foto;
         System.out.println(ruta);
+
         
-         
-        
+                
         String desc= txtDescription.getText(); //string descripcion
         String lugar= txtLugar.getText(); //string lugar
         LocalDate fecha= date.getValue(); //string fecha
@@ -204,6 +206,19 @@ public class ImagenController implements Initializable {
         System.out.println("tamanio: "+App.listadoCamaras.size());
         for (Camara camara : App.listadoCamaras){
             System.out.println(camara.getMarca() + " - " + camara.getModelo());
+        }
+
+        try (ObjectOutputStream ou = new ObjectOutputStream(new FileOutputStream("serializados/listadoAlbumes.ser"))) {
+            ou.writeObject(App.albunes);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+        try (ObjectOutputStream ou = new ObjectOutputStream(new FileOutputStream("serializados/listadoCamaras.ser"))) {
+            System.out.println("serializando al agregar camaras");
+            ou.writeObject(App.listadoCamaras);
+        } catch (IOException e) {
+            e.getMessage();
         }
         
         

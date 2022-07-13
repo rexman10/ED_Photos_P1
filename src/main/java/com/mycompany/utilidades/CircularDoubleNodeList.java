@@ -5,11 +5,13 @@
  */
 package com.mycompany.utilidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author rsgar
  */
-class CircularDoubleNodeList<E> {
+class CircularDoubleNodeList<E> implements Serializable {
     
     private E content;
     private CircularDoubleNodeList<E> next;

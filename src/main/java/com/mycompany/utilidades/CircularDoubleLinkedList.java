@@ -1,10 +1,11 @@
 
 package com.mycompany.utilidades;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-public class CircularDoubleLinkedList<E> implements List<E>{
+public class CircularDoubleLinkedList<E> implements List<E>, Serializable{
 
     private CircularDoubleNodeList<E> last;
    

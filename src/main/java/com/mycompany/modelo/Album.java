@@ -1,5 +1,9 @@
 package com.mycompany.modelo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 import com.mycompany.modelo.Imagen;
@@ -48,6 +52,22 @@ public class Album implements Serializable {
     @Override
     public String toString(){
         return getNombre();
+    }
+
+    public static ArrayList<Album> cargarAlbunes(String ruta) {
+        ArrayList<Album> resultado = new ArrayList<>();
+        System.out.println("xxxxxxxxxxxxx");
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(ruta))) {
+            resultado = (ArrayList<Album>) oi.readObject();
+            oi.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("archivo no existe");
+        } catch (IOException   ex) {
+            System.out.println("error io:"+ex.getMessage());
+        } catch (ClassNotFoundException  ex) {
+            System.out.println("error class:"+ex.getMessage());
+        }
+        return resultado;
     }
     
     

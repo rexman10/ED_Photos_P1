@@ -1,9 +1,10 @@
 
 package com.mycompany.utilidades;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class ArrayList<E> implements List<E>{
+public class ArrayList<E> implements List<E>, Serializable{
 
     private int effectiveSize = 0;
     private int capacity = 100;

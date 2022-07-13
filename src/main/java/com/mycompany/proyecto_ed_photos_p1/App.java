@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -72,6 +74,7 @@ public class App extends Application {
     }
 
     public static void cargarBaseDatos(){
+        /*
         Camara cam1 = new Camara("J25","Cannon");
         DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fecha1 = LocalDate.now();
@@ -131,7 +134,7 @@ public class App extends Application {
         im6.setNombre("j-06");
         
         LocalDate fIm7 = LocalDate.of(2019, Month.MARCH, 10);
-        Imagen im7 = new Imagen("imagenes/j-07.jpg","descripcion corta","Guayaquil",cam1,fIm7);
+        Imagen im7 = new Imagen("imagenes/j-07.jpg","descripcion corta","Atlanta",cam1,fIm7);
         im7.setNombre("j-07");
         List<String> pIm7 = new ArrayList();
         pIm7.addLast("John Guadalupe");
@@ -152,7 +155,7 @@ public class App extends Application {
         im10.setNombre("j-10");
         
         LocalDate fIm11 = LocalDate.of(2021, Month.NOVEMBER, 16);
-        Imagen im11 = new Imagen("imagenes/j-11.jpg","descripcion corta","Romareda",cam1,fIm11);
+        Imagen im11 = new Imagen("imagenes/j-11.jpg","descripcion corta","Multitud",cam1,fIm11);
         im11.setNombre("j-11");
         List<String> pIm11 = new ArrayList();
         pIm11.addLast("Steven Escobar");
@@ -372,6 +375,22 @@ public class App extends Application {
             }
         }
         albunes.addLast(album3);
+        
+        try (ObjectOutputStream ou = new ObjectOutputStream(new FileOutputStream("serializados/listadoAlbumes.ser"))) {
+            ou.writeObject(App.albunes);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+        try (ObjectOutputStream ou = new ObjectOutputStream(new FileOutputStream("serializados/listadoCamaras.ser"))) {
+            ou.writeObject(App.listadoCamaras);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        */
+        albunes = Album.cargarAlbunes("serializados/listadoAlbumes.ser");
+
+        listadoCamaras = Camara.cargarCamaras("serializados/listadoCamaras.ser");
 
     }
     
