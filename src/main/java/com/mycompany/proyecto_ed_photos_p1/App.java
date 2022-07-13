@@ -20,6 +20,7 @@ import com.mycompany.utilidades.ArrayList;
 import com.mycompany.utilidades.CircularDoubleLinkedList;
 import com.mycompany.utilidades.DoubleLinkedList;
 import com.mycompany.utilidades.List;
+import java.time.Month;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -74,39 +75,108 @@ public class App extends Application {
         Camara cam1 = new Camara("J25","Cannon");
         DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fecha1 = LocalDate.now();
-        String a = fecha1.format(f1);
-        Imagen im1 = new Imagen("imagenes/img022.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im1.setNombre("img022");
-        Album album1 = new Album("Album1", "visita a cascadas 2019");
-        album1.agregarImagen(im1);
-        albunes.addLast(album1);
-        Imagen im2 = new Imagen("imagenes/img001.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im2.setNombre("img001");
-        Imagen im3 = new Imagen("imagenes/img002.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im3.setNombre("img002");
-        Imagen im4 = new Imagen("imagenes/img019.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im4.setNombre("img019");
-        Imagen im5 = new Imagen("imagenes/img021.jpg","descripcion corta","Guayaquil",cam1,fecha1);
-        im5.setNombre("img021");
+        //String a = fecha1.format(f1);
 
+        Album album1 = new Album("Coleccion de Juan", "Recopilacion de fotos");       
+        albunes.addLast(album1);
+        
+        LocalDate fIm1 = LocalDate.of(2021, Month.JULY, 10);
+        Imagen im1 = new Imagen("imagenes/j-01.jpg","descripcion corta","Cuenca",cam1,fIm1);
+        im1.setNombre("j-01");
+        List<String> pIm1 = new ArrayList();
+        pIm1.addLast("John Guadalupe");
+        pIm1.addLast("Rosa Rosas");
+        pIm1.addLast("Juan Guadalupe");
+        im1.setPersonas(pIm1);
+        
+        LocalDate fIm2 = LocalDate.of(2019, Month.FEBRUARY, 18);
+        Imagen im2 = new Imagen("imagenes/j-02.jpg","descripcion corta","Romareda",cam1,fIm2);
+        im2.setNombre("j-02");
+        List<String> pIm2 = new ArrayList();
+        pIm2.addLast("Steven Escobar");
+        pIm2.addLast("Santiago Lindao");
+        pIm2.addLast("Steve Taranto");
+        pIm2.addLast("Juan Guadalupe");
+        pIm2.addLast("Carlos Mata");
+        im2.setPersonas(pIm2);
+        
+        LocalDate fIm3 = LocalDate.of(2019, Month.OCTOBER, 28);
+        Imagen im3 = new Imagen("imagenes/j-03.jpg","descripcion corta","Guayaquil",cam1,fIm3);
+        im3.setNombre("j-03");
+        List<String> pIm3 = new ArrayList();
+        pIm3.addLast("Carlos Mata");
+        pIm3.addLast("Diego Naht");
+        pIm3.addLast("Steve Taranto");
+        pIm3.addLast("Juan Guadalupe");        
+        im3.setPersonas(pIm3);
+        
+        LocalDate fIm4 = LocalDate.of(2019, Month.JUNE, 12);
+        Imagen im4 = new Imagen("imagenes/j-04.jpg","descripcion corta","Guayaquil",cam1,fIm4);
+        im4.setNombre("j-04");
+        List<String> pIm4 = new ArrayList();
+        pIm4.addLast("Carlos Mata");
+        pIm4.addLast("Santiago Lindao");
+        pIm4.addLast("Steven Escobar");
+        pIm4.addLast("Cristopher Espic");        
+        pIm4.addLast("Juan Guadalupe");
+        pIm4.addLast("Marco Manrique");
+        im4.setPersonas(pIm4);
+        
+        LocalDate fIm5 = LocalDate.of(2020, Month.DECEMBER, 23);
+        Imagen im5 = new Imagen("imagenes/j-05.jpg","descripcion corta","Guayaquil",cam1,fIm5);
+        im5.setNombre("j-05");
+        
+        LocalDate fIm6 = LocalDate.of(2019, Month.AUGUST, 16);
+        Imagen im6 = new Imagen("imagenes/j-06.jpg","descripcion corta","Guayaquil",cam1,fIm6);
+        im6.setNombre("j-06");
+        
+        LocalDate fIm7 = LocalDate.of(2019, Month.MARCH, 10);
+        Imagen im7 = new Imagen("imagenes/j-07.jpg","descripcion corta","Guayaquil",cam1,fIm7);
+        im7.setNombre("j-07");
+        List<String> pIm7 = new ArrayList();
+        pIm7.addLast("John Guadalupe");
+        pIm7.addLast("Juan Guadalupe");
+        pIm7.addLast("Rosa Rosas");
+        pIm7.addLast("Andrea Guadalupe");        
+        im7.setPersonas(pIm7);     
+        
+        LocalDate fIm9 = LocalDate.of(2021, Month.AUGUST, 15);
+        Imagen im9 = new Imagen("imagenes/j-09.jpg","descripcion corta","Guayaquil",cam1,fIm9);
+        im9.setNombre("j-09");
+        List<String> pIm9 = new ArrayList();
+        pIm9.addLast("Juan Guadalupe");    
+        im9.setPersonas(pIm9);
+        
+        LocalDate fIm10 = LocalDate.of(2022, Month.JUNE, 17);
+        Imagen im10 = new Imagen("imagenes/j-10.jpg","descripcion corta","Guayaquil",cam1,fIm10);
+        im10.setNombre("j-10");
+        
+        LocalDate fIm11 = LocalDate.of(2021, Month.NOVEMBER, 16);
+        Imagen im11 = new Imagen("imagenes/j-11.jpg","descripcion corta","Romareda",cam1,fIm11);
+        im11.setNombre("j-11");
+        List<String> pIm11 = new ArrayList();
+        pIm11.addLast("Steven Escobar");
+        pIm11.addLast("Santiago Lindao");
+        pIm11.addLast("Steve Taranto");
+        pIm11.addLast("Juan Guadalupe");
+        pIm11.addLast("Carlos Mata");
+        im11.setPersonas(pIm11);
+
+
+        
+        album1.agregarImagen(im1);
         album1.agregarImagen(im2);
         album1.agregarImagen(im3);
         album1.agregarImagen(im4);
         album1.agregarImagen(im5);
-        /*
-        album1.agregarImagen(im2);
-        album1.agregarImagen(im3);
-        album1.agregarImagen(im4);
-        album1.agregarImagen(im5);
-        album1.agregarImagen(im2);
-        album1.agregarImagen(im3);
-        album1.agregarImagen(im4);
-        album1.agregarImagen(im5);
-        album1.agregarImagen(im2);
-        album1.agregarImagen(im3);
-        album1.agregarImagen(im4);
-        album1.agregarImagen(im5);
-        */
+        album1.agregarImagen(im6);
+        album1.agregarImagen(im7);
+        album1.agregarImagen(im9);
+        album1.agregarImagen(im10);
+        album1.agregarImagen(im11);
+
+        
+
         
         Camara cam2 = new Camara("H95","Cannon");
         Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","descripcion corta","Guayaquil",cam2,fecha1);
