@@ -25,7 +25,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <GridPane alignment="CENTER" prefHeight="513.0" prefWidth="601.0">
+            <GridPane alignment="CENTER" maxWidth="-Infinity" prefHeight="513.0" prefWidth="529.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -50,18 +50,18 @@
                   <Label text="Marca Cámara:" GridPane.rowIndex="6" />
                   <Label text="Personas:" GridPane.rowIndex="7" />
                   <Button mnemonicParsing="false" onAction="#elegirImagen" text="Elegir Archivo" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtDescription" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtMarcaC" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="txtModeloC" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="txtLugar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtDescription" maxWidth="-Infinity" prefHeight="31.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtMarcaC" maxWidth="-Infinity" prefHeight="31.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="txtModeloC" maxWidth="-Infinity" prefHeight="31.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txtLugar" maxWidth="-Infinity" prefHeight="31.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <DatePicker fx:id="date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <ComboBox fx:id="comboAlbum" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <VBox alignment="CENTER" prefHeight="94.0" prefWidth="289.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
                         <TableView fx:id="tablaPersonas" prefHeight="124.0" prefWidth="289.0">
                           <columns>
-                            <TableColumn fx:id="colNombres" prefWidth="149.0" text="Nombre" />
-                              <TableColumn fx:id="colOpciones" prefWidth="138.0" text="Opciones" />
+                            <TableColumn fx:id="colNombres" prefWidth="137.0" text="Nombre" />
+                              <TableColumn fx:id="colOpciones" prefWidth="150.0" text="Opciones" />
                           </columns>
                         </TableView>
                         <Button mnemonicParsing="false" onAction="#agregarPersona" text="Agregar Persona" />

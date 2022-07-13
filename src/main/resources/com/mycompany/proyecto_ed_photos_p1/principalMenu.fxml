@@ -128,7 +128,6 @@
             <Button fx:id="btnPrevPhoto" layoutX="10.0" layoutY="316.0" mnemonicParsing="false" onAction="#fotoAnterior" text="Prev" />
             <Button fx:id="btnNextPhoto" layoutX="773.0" layoutY="316.0" mnemonicParsing="false" onAction="#fotoSiguiente" text="Next" />
             <Button fx:id="btnExitFullScreen" layoutX="787.0" layoutY="12.0" mnemonicParsing="false" onAction="#setVistaGrid" text="X" />
-            <Label fx:id="lbPhotoName" layoutX="399.0" layoutY="620.0" text="Label" />
          </children>
       </Pane>
       <ScrollPane fx:id="spGridView" fitToWidth="true" hbarPolicy="NEVER" layoutX="38.0" layoutY="72.0" prefHeight="656.0" prefWidth="839.0" />
