@@ -177,23 +177,43 @@ public class App extends Application {
 
         
         Camara cam2 = new Camara("H95","Cannon");
-        Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","descripcion corta","Guayaquil",cam2,fecha1);
+        Camara cam5 = new Camara("L9000","Sony");
+        
+        LocalDate date1 = LocalDate.of(2019, Month.DECEMBER, 24);
+        Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","salida familiar","Guayaquil",cam2,date1);
         imd1.setNombre("d-imagen-1");
-        Imagen imd2 = new Imagen("imagenes/d-imagen-2.jpg","descripcion corta","Vista Sol",cam2,fecha1);
+        imd1.setReaccion("Me gusta");
+        
+        LocalDate date2 = LocalDate.of(2020, Month.AUGUST, 9);
+        Imagen imd2 = new Imagen("imagenes/d-imagen-2.jpg","primera reunion","Vista Sol",cam5,date2);
         imd2.setNombre("d-imagen-2");
-        Imagen imd3 = new Imagen("imagenes/d-imagen-3.jpg","descripcion corta","Milagro",cam2,fecha1);
+        
+        LocalDate date3 = LocalDate.of(2021, Month.AUGUST, 8);
+        Imagen imd3 = new Imagen("imagenes/d-imagen-3.jpg","fiesta tia","Milagro",cam2,date3);
         imd3.setNombre("d-imagen-3");
-        Imagen imd4 = new Imagen("imagenes/d-imagen-4.jpg","descripcion corta","Hilton Colon",cam2,fecha1);
+        
+        LocalDate date4 = LocalDate.of(2020, Month.FEBRUARY, 16);
+        Imagen imd4 = new Imagen("imagenes/d-imagen-4.jpg","fiesta graduacion 2020","Hilton Colon",cam5,date4);
         imd4.setNombre("d-imagen-4");
-        Imagen imd5 = new Imagen("imagenes/d-imagen-5.jpg","descripcion corta","Porto",cam2,fecha1);
+        
+        LocalDate date5 = LocalDate.of(2022, Month.MAY, 21);
+        Imagen imd5 = new Imagen("imagenes/d-imagen-5.jpg","cumpleaños isabella","Porto",cam2,date5);
         imd5.setNombre("d-imagen-5");
-        Imagen imd6 = new Imagen("imagenes/d-imagen-6.jpg","descripcion corta","Vista Sol",cam2,fecha1);
+        
+        LocalDate date6 = LocalDate.of(2020, Month.NOVEMBER, 22);
+        Imagen imd6 = new Imagen("imagenes/d-imagen-6.jpg","cumpleaños michael 2020","Vista Sol",cam5,date6);
         imd6.setNombre("d-imagen-6");
-        Imagen imd7 = new Imagen("imagenes/d-imagen-7.jpg","descripcion corta","Ciudad Celeste",cam2,fecha1);
+        
+        LocalDate date7 = LocalDate.of(2020, Month.AUGUST, 31);
+        Imagen imd7 = new Imagen("imagenes/d-imagen-7.jpg","cumpleaños papa 2020","Ciudad Celeste",cam2,date7);
         imd7.setNombre("d-imagen-7");
-        Imagen imd8 = new Imagen("imagenes/d-imagen-8.jpg","descripcion corta","Quito",cam2,fecha1);
+        
+        LocalDate date8 = LocalDate.of(2021, Month.SEPTEMBER, 15);
+        Imagen imd8 = new Imagen("imagenes/d-imagen-8.jpg","viaje a quito por visa 2021","Quito",cam5,date8);
         imd8.setNombre("d-imagen-8");
-        Imagen imd9 = new Imagen("imagenes/d-imagen-9.jpg","descripcion corta","Milagro",cam2,fecha1);
+        
+        LocalDate date9 = LocalDate.of(2007, Month.JUNE, 13);
+        Imagen imd9 = new Imagen("imagenes/d-imagen-9.jpg","recuerdo de mama y yo","Milagro",cam2,date9);
         imd9.setNombre("d-imagen-9");
         
         List<String> personas=new ArrayList();
@@ -272,7 +292,7 @@ public class App extends Application {
         LocalDate fecha9 = LocalDate.of(2019,Month.JULY,07);
         
         Camara cam3 = new Camara("M200","Canon");
-        Camara cam4 = new Camara("","");
+        Camara cam4 = new Camara("H980","Nikon");
         
         Imagen imC1 = new Imagen("imagenes/picMiguel.png","sesion de fotos Miguel","Guayaquil",cam3,fecha2);
         imC1.setNombre("picMiguel");
