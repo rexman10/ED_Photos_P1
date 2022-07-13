@@ -176,8 +176,6 @@ public class App extends Application {
         album1.agregarImagen(im11);
 
         
-
-        
         Camara cam2 = new Camara("H95","Cannon");
         Imagen imd1 = new Imagen("imagenes/d-imagen-1.jpg","descripcion corta","Guayaquil",cam2,fecha1);
         imd1.setNombre("d-imagen-1");
@@ -263,6 +261,86 @@ public class App extends Application {
         album2.agregarImagen(imd7);
         album2.agregarImagen(imd8);
         album2.agregarImagen(imd9);
+        
+        LocalDate fecha2 = LocalDate.of(2022,Month.JUNE,20);
+        LocalDate fecha3 = LocalDate.of(2005,Month.DECEMBER,24);
+        LocalDate fecha4 = LocalDate.of(2017,Month.APRIL,15);
+        LocalDate fecha5 = LocalDate.of(2022,Month.MARCH,01);
+        LocalDate fecha6 = LocalDate.of(2017,Month.APRIL,22);
+        LocalDate fecha7 = LocalDate.of(2021,Month.NOVEMBER,06);
+        LocalDate fecha8 = LocalDate.of(2018,Month.MAY,30);
+        LocalDate fecha9 = LocalDate.of(2019,Month.JULY,07);
+        
+        Camara cam3 = new Camara("M200","Canon");
+        Camara cam4 = new Camara("","");
+        
+        Imagen imC1 = new Imagen("imagenes/picMiguel.png","sesion de fotos Miguel","Guayaquil",cam3,fecha2);
+        imC1.setNombre("picMiguel");
+        Imagen imC2 = new Imagen("imagenes/picSiblings.jpg","foto Navidad","Guayaquil",cam3,fecha3);
+        imC2.setNombre("picSiblings");
+        Imagen imC3 = new Imagen("imagenes/pedrera.jpg","paisaje pedrera","La Pedrera-Casa Milà",cam3,fecha4);
+        imC3.setNombre("pedrera");
+        Imagen imC4 = new Imagen("imagenes/picBday.jpg","Cumple 20 Mei","Guayaquil",cam4,fecha5);
+        imC4.setNombre("picBday");
+        Imagen imC5 = new Imagen("imagenes/fotoParque.jpg","Viaje en Barcelona","Parque del Laberinto de Horta",cam4,fecha6);
+        imC5.setNombre("fotoParque");        
+        Imagen imC6 = new Imagen("imagenes/fotoParque2.jpg","Viaje en Europa","Barcelona España",cam4,fecha6);
+        imC6.setNombre("fotoParque2");        
+        Imagen imC7 = new Imagen("imagenes/picFood.jpg","Desayuno familiar","La Veredita",cam4,fecha7);
+        imC7.setNombre("picFood");  
+        Imagen imC8 = new Imagen("imagenes/venecia.jpg","Viaje en Italia","Venecia",cam3,fecha8);
+        imC8.setNombre("Venecia");        
+        Imagen imC9 = new Imagen("imagenes/italia.jpg","","Fontana di Trevi",cam4,fecha9);
+        imC9.setNombre("Italia");          
+        
+        List<String> ppl=new ArrayList();
+        ppl.addLast("Miguel Chang");
+        imC1.setPersonas(ppl);
+        
+        List<String> ppl2=new ArrayList();
+        ppl2.addLast("Kevin Chang");
+        ppl2.addLast("Joseph Chang");
+        ppl2.addLast("Meiyin Chang");
+        ppl2.addLast("Su lin Chang");
+        imC2.setPersonas(ppl2);
+        
+        List<String> ppl3=new ArrayList();
+        ppl3.addLast("Meiyin Chang");
+        ppl3.addLast("Miguel Chang");
+        imC4.setPersonas(ppl3);
+        
+        List<String> ppl4=new ArrayList();
+        ppl4.addLast("Vanessa Rizzo");
+        ppl4.addLast("Meiyin Chang");
+        imC5.setPersonas(ppl4);
+        
+        List<String> ppl5=new ArrayList();
+        ppl5.addLast("Meiyin Chang");
+        ppl5.addLast("Su lin Chang");
+        ppl5.addLast("Vanessa Rizzo");
+        imC8.setPersonas(ppl5);
+        
+        imC1.setReaccion("Me gusta");
+        imC2.setReaccion("Me gusta");
+        imC3.setReaccion("Me gusta");
+        imC4.setReaccion("Me encanta");
+        imC5.setReaccion("Me encanta");
+        imC6.setReaccion("Me encanta");
+        imC7.setReaccion("Me entristece");
+        imC8.setReaccion("Me gusta");
+        imC9.setReaccion("Me gusta");
+        
+        Album albumMei = new Album("Album de Mei", "Cosas random");        
+        albumMei.agregarImagen(imC1);
+        albumMei.agregarImagen(imC2);
+        albumMei.agregarImagen(imC3);
+        albumMei.agregarImagen(imC4);
+        albumMei.agregarImagen(imC5);
+        albumMei.agregarImagen(imC6);
+        albumMei.agregarImagen(imC7);
+        albumMei.agregarImagen(imC8);
+        albumMei.agregarImagen(imC9);
+        albunes.addLast(albumMei);
         
         
         Album album3 = new Album("Todas las fotos", "Galeria de fotos");
