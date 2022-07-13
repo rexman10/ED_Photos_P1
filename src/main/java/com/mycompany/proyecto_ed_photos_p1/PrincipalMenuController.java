@@ -93,8 +93,6 @@ public class PrincipalMenuController implements Initializable {
     @FXML
     private Label lbLugar;
     @FXML
-    private Label lbPersonas;
-    @FXML
     private Label lbPhotoName;
     @FXML
     private Pane pFullview;
@@ -139,12 +137,14 @@ public class PrincipalMenuController implements Initializable {
     private Label lbFecha;
     
     private CircularDoubleLinkedList<Imagen> imagenesAlbum= new CircularDoubleLinkedList();
-    private CircularDoubleLinkedList<Imagen> imagesDisplayed = null;
+    private CircularDoubleLinkedList<Imagen> imagesDisplayed = new CircularDoubleLinkedList();
     
     @FXML
     private ListView<String> listaComentarios;
     @FXML
     private Button btAdministrarCamaras;
+    @FXML
+    private ListView<String> lviewPersonas;
 
     /**
      * Initializes the controller class.
@@ -186,7 +186,34 @@ public class PrincipalMenuController implements Initializable {
         pFullview.setVisible(true);
         vista.selectToggle(rbFullView);
         
-        if (!cbAlbum.getValue().getContenido().isEmpty()) {
+        
+        if(!imagesDisplayed.isEmpty()){
+            if(currentImagen==null){
+                Imagen imagen=imagesDisplayed.get(0);
+                setearImageView(imagen.getPath());
+                setearDatosInterfaz(imagen);
+            }
+             if(currentImagen!=null){
+                boolean esFoto=false;
+                
+                
+                
+                while(esFoto==false){
+                    Iterator<Imagen> it=imagesDisplayed.iterator();
+                    
+                    while(it.hasNext()){
+                        Imagen imActual=it.next();
+                        if(imActual.getPath().equals(currentImagen.getPath())){
+                            setearDatosInterfaz(imActual);
+                            setearImageView(imActual.getPath());
+                            esFoto=true;
+                        }
+                    }
+                }
+                
+            }
+        }
+        else if (!cbAlbum.getValue().getContenido().isEmpty()) {
              /* OTRA ALTERNATIVA
             int n=0;
             for (Imagen imagen : cbAlbum.getValue().getContenido()) {
@@ -226,6 +253,8 @@ public class PrincipalMenuController implements Initializable {
             }
             
         }
+        
+        
     }
     
     @FXML
@@ -341,10 +370,22 @@ public class PrincipalMenuController implements Initializable {
     
    private void displayImages(CircularDoubleLinkedList<Imagen> images) {
         imagesDisplayed = images;
+        
+        if(images==null){
+            System.out.println("LA LISTA DE IMAGENES DISPLAYED ESTA VACIA ");
+        }
+        
+        else{
+            for (Imagen i : images) {
+                Pane imageView = crearVistaImagen(i);
+                galeria.getChildren().addAll(imageView);
+            }
+        }
+        /*
         for (Imagen i : images) {
             Pane imageView = crearVistaImagen(i);
             galeria.getChildren().addAll(imageView);
-        }
+        }*/
     }
 
     //Busqueda Simple
@@ -623,6 +664,7 @@ public class PrincipalMenuController implements Initializable {
         
         listaComentarios.getItems().clear();
         lbEtiquetas.setText("");
+        lviewPersonas.getItems().clear();
         
         currentImagen = imagen;
         System.out.println(currentImagen.getNombre());
@@ -648,6 +690,12 @@ public class PrincipalMenuController implements Initializable {
             }
         }
         
+        if(!imagen.getPersonas().isEmpty()){
+            for(String p:imagen.getPersonas()){
+                lviewPersonas.getItems().add(p);
+            }
+        }
+        
         if(!imagen.getKeywords().isEmpty()){
             String texto="";
             for(String p: imagen.getKeywords()){
@@ -669,6 +717,18 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     public void mostrarAlbum(){
+        rbFiltroSimple.setSelected(true);
+        txtParametro1.setText("");
+        txtParametro2.setText("");
+        
+        if(imagesDisplayed==null){
+            System.out.println("IMAGES DISPLAYED ESTA VACIA");
+        }
+        else{
+            imagesDisplayed.clear();
+        }
+        //imagesDisplayed.clear();
+        
         rbLike.setSelected(false);
         rbLove.setSelected(false);
         rbSad.setSelected(false);
@@ -793,6 +853,36 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     private void fotoAnterior(ActionEvent event) {
+        if(!imagesDisplayed.isEmpty()){
+            ListIterator<Imagen> it= imagesDisplayed.listIterator();
+        
+            boolean esFoto=false;
+            while(esFoto==false){
+                Imagen im=it.previous();
+                if(im.getPath().equals(currentImagen.getPath())){
+                    esFoto=true;
+                }
+            }
+
+            Imagen nuevaImagen=it.previous();
+            setearDatosInterfaz(nuevaImagen);
+            setearImageView(nuevaImagen.getPath());
+        }else {
+            ListIterator<Imagen> it= imagenesAlbum.listIterator();
+        
+            boolean esFoto=false;
+            while(esFoto==false){
+                Imagen im=it.previous();
+                if(im.getPath().equals(currentImagen.getPath())){
+                    esFoto=true;
+                }
+            }
+
+            Imagen nuevaImagen=it.previous();
+            setearDatosInterfaz(nuevaImagen);
+            setearImageView(nuevaImagen.getPath());
+        }
+        /*
         ListIterator<Imagen> it= imagenesAlbum.listIterator();
         
         boolean esFoto=false;
@@ -805,11 +895,40 @@ public class PrincipalMenuController implements Initializable {
         
         Imagen nuevaImagen=it.previous();
         setearDatosInterfaz(nuevaImagen);
-        setearImageView(nuevaImagen.getPath());
+        setearImageView(nuevaImagen.getPath());*/
     }
 
     @FXML
-    private void fotoSiguiente(ActionEvent event) {
+    private void fotoSiguiente() {
+        
+        if(!imagesDisplayed.isEmpty()){
+            ListIterator<Imagen> it= imagesDisplayed.listIterator();
+            boolean esFoto=false;
+            while(esFoto==false){
+                Imagen im=it.next();
+                if(im.getPath().equals(currentImagen.getPath())){
+                    esFoto=true;
+                }
+            }
+
+            Imagen nuevaImagen=it.next();
+            setearDatosInterfaz(nuevaImagen);
+            setearImageView(nuevaImagen.getPath());
+        }else {
+            ListIterator<Imagen> it= imagenesAlbum.listIterator();
+            boolean esFoto=false;
+            while(esFoto==false){
+                Imagen im=it.next();
+                if(im.getPath().equals(currentImagen.getPath())){
+                    esFoto=true;
+                }
+            }
+
+            Imagen nuevaImagen=it.next();
+            setearDatosInterfaz(nuevaImagen);
+            setearImageView(nuevaImagen.getPath());
+        }
+        /*
         ListIterator<Imagen> it= imagenesAlbum.listIterator();
         boolean esFoto=false;
         while(esFoto==false){
@@ -822,6 +941,7 @@ public class PrincipalMenuController implements Initializable {
         Imagen nuevaImagen=it.next();
         setearDatosInterfaz(nuevaImagen);
         setearImageView(nuevaImagen.getPath());
+        */
     }
     
     private void resetCurrentImagen(){
@@ -831,6 +951,7 @@ public class PrincipalMenuController implements Initializable {
         lbFecha.setText("");
         listaComentarios.getItems().clear();
         lbEtiquetas.setText("");
+        lviewPersonas.getItems().clear();
     }
 
     @FXML

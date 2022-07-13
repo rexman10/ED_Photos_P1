@@ -118,14 +118,7 @@
       <VBox layoutX="930.0" layoutY="625.0" prefHeight="154.0" prefWidth="294.0" spacing="15.0">
          <children>
             <Label text="Comentarios:" />
-            <ScrollPane prefHeight="77.0" prefWidth="294.0">
-               <content>
-                  <VBox prefHeight="148.0" prefWidth="292.0" spacing="10.0">
-                     <children>
-                        <ListView fx:id="listaComentarios" prefHeight="53.0" prefWidth="292.0" />
-                     </children></VBox>
-               </content>
-            </ScrollPane>
+            <ListView fx:id="listaComentarios" prefHeight="53.0" prefWidth="292.0" />
             <Button mnemonicParsing="false" onAction="#agregarComentario" text="Añadir Comentario" />
          </children>
       </VBox>
@@ -154,7 +147,12 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="btnFiltrar" layoutX="776.0" layoutY="28.0" mnemonicParsing="false" onAction="#filtrarImagenes" text="Filtrar Imagenes" />
+      <VBox layoutX="776.0" layoutY="4.0" prefHeight="56.0" prefWidth="105.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnFiltrar" mnemonicParsing="false" onAction="#filtrarImagenes" text="Filtrar Imagenes" />
+            <Button fx:id="btLimpiarFiltro" mnemonicParsing="false" onAction="#mostrarAlbum" text="Limpiar filtros" />
+         </children>
+      </VBox>
       <HBox fx:id="filtroSimple" layoutX="238.0" layoutY="6.0" prefHeight="31.0" prefWidth="468.0" spacing="30.0">
          <children>
             <Label text="Parámetro 1:" />

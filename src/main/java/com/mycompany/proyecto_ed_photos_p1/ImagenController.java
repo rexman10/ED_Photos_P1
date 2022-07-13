@@ -184,8 +184,20 @@ public class ImagenController implements Initializable {
         }
         imagen.setPersonas(listaPersonas);
         
+        //CONDICION PARA GUARDAR LA IMAGEN EN EL ABUM "Todas las fotos"
+        //comboAlbum.getValue().agregarImagen(imagen);
+        if(comboAlbum.getValue().getNombre().equals("Todas las fotos")){
+            comboAlbum.getValue().agregarImagen(imagen);
+        }else{
+            comboAlbum.getValue().agregarImagen(imagen);
+            for(Album a:albunes){
+                if(a.getNombre().equals("Todas las fotos")){
+                    a.agregarImagen(imagen);
+                }
+            }
+        }
         
-        comboAlbum.getValue().agregarImagen(imagen);
+        
         System.out.println("IMAGEN AGREGADA AL ALBUM: "+comboAlbum.getValue());
         App.mostrarAlerta(Alert.AlertType.INFORMATION, "Nueva imagen agregada exitosamente al albúm: "+comboAlbum.getValue());
         App.setRoot("principalMenu");

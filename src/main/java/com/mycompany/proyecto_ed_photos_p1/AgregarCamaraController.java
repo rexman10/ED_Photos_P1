@@ -72,7 +72,7 @@ public class AgregarCamaraController implements Initializable {
 
 
         
-            if (txtMarca.getText().equals(oldMarca) || txtModelo.getText().equals(oldModelo)){
+            if (txtMarca.getText().equals(oldMarca) && txtModelo.getText().equals(oldModelo)){
                 App.mostrarAlerta(Alert.AlertType.ERROR, "Los datos a modificar son los mismos, Modifiquelos");
             } else {
                 cam.setMarca(txtMarca.getText());

@@ -194,6 +194,16 @@ public class App extends Application {
         album2.agregarImagen(imd8);
         album2.agregarImagen(imd9);
         
+        
+        Album album3 = new Album("Todas las fotos", "Galeria de fotos");
+        //albunes.addLast(album3);
+        for(Album al:albunes){
+            List<Imagen> i=al.getContenido();
+            for(Imagen im:i){
+                album3.agregarImagen(im);
+            }
+        }
+        albunes.addLast(album3);
 
     }
     
