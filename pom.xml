@@ -80,4 +80,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>Grupo_05</name>
 </project>
